@@ -60,26 +60,36 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
 }
 
  public void BusquedaProducto(String dato)throws SQLException {
-     try{
-         List <Productos> productos = new DAOProductos().ObtenerDatosPro();
-     DefaultTableModel modelo = new DefaultTableModel();
-     String[] columnas = {"id_producto", "nombre", "descripcion", "precio"};
-     modelo.setColumnIdentifiers(columnas);
-              // Se llena la tabla con los datos de cada producto
-        for(Productos pro : productos){
-            String[] renglon = {
-                Integer.toString(pro.getId_producto()),
-                pro.getNombre(),
-                pro.getDescripcion(),
-                pro.getPrecio().toString()
-            };
-            modelo.addRow(renglon);
-        }
-        jTableproducto.setModel(modelo); // Se actualiza la tabla en la interfaz
-     }catch(Exception e) {
-            
-        e.printStackTrace();
-        JOptionPane.showMessageDialog(rootPane, "Error al obtener los datos de productos.");
+     try {
+    // Obtiene la lista de productos desde la base de datos
+    List<Productos> productos = new DAOProductos().ObtenerDatosPro();
+    
+    // Crea un modelo de tabla para mostrar los productos
+    DefaultTableModel modelo = new DefaultTableModel();
+    
+    // Define las columnas de la tabla
+    String[] columnas = {"id_producto", "nombre", "descripcion", "precio"};
+    modelo.setColumnIdentifiers(columnas); // Asigna las columnas al modelo
+    
+    // Llena la tabla con los datos de cada producto
+    for (Productos pro : productos) {
+        String[] renglon = {
+            Integer.toString(pro.getId_producto()), // Convierte el ID a String
+            pro.getNombre(),                         // Obtiene el nombre del producto
+            pro.getDescripcion(),                    // Obtiene la descripción del producto
+            pro.getPrecio().toString()               // Convierte el precio a String
+        };
+        modelo.addRow(renglon); // Agrega el producto como una fila en la tabla
+    } 
+    // Asigna el modelo a la tabla en la interfaz gráfica
+    jTableproducto.setModel(modelo);
+    
+    }catch (Exception e) {
+    // Muestra el error en la consola para depuración
+    e.printStackTrace();
+    
+    // Muestra un mensaje de error al usuario
+    JOptionPane.showMessageDialog(rootPane, "Error al obtener los datos de productos.");
     }
     
 }
