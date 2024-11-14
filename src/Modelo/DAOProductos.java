@@ -53,7 +53,27 @@ public class DAOProductos {
         }
         return productos; // Retorna la lista de productos
     }
-    
+    public List <Productos> ObtenerDatosPro() {
+        String transaccion = " CALL Producto()";
+        
+        // Lista de registros obtenidos de la base de datos
+        List<Map<String, Object>> registros = new DataBase().Listar(transaccion);
+        List<Productos> productos = new ArrayList<>();
+        
+        
+        // Recorre cada registro y lo convierte en un objeto Productos
+        for (Map<String, Object> registro : registros) {
+            Productos pro;
+            pro = new Productos(
+                    (int) registro.get("id_producto"), // Obtiene el ID del producto
+                    (String) registro.get("nombre"), // Obtiene el nombre
+                    (String) registro.get("descripcion"), // Obtiene la descripción
+                    (float) registro.get("precio") // Obtiene el precio
+            );
+            productos.add(pro); // Agrega el producto a la lista
+        }
+        return productos; // Retorna la lista de productos
+    }
     // Método para eliminar un producto de la base de datos por su ID
     public int Eliminar(int id_producto) {
         // Consulta SQL para eliminar el producto con el ID especificado

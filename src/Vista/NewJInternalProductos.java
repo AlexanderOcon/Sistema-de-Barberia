@@ -4,6 +4,9 @@ import Modelo.*;
 import java.util.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class NewJInternalProductos extends javax.swing.JInternalFrame {
@@ -47,14 +50,44 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
             modelo.addRow(renglon);
         }
         jTableproducto.setModel(modelo); // Se actualiza la tabla en la interfaz
-      }catch(Exception e) {
+        
+    }catch(Exception e) {
+            
         e.printStackTrace();
         JOptionPane.showMessageDialog(rootPane, "Error al obtener los datos de productos.");
     }
     
 }
 
-   // Método para actualizar la información de un producto
+ public void BusquedaProducto(String dato)throws SQLException {
+     try{
+         List <Productos> productos = new DAOProductos().ObtenerDatosPro();
+     DefaultTableModel modelo = new DefaultTableModel();
+     String[] columnas = {"id_producto", "nombre", "descripcion", "precio"};
+     modelo.setColumnIdentifiers(columnas);
+              // Se llena la tabla con los datos de cada producto
+        for(Productos pro : productos){
+            String[] renglon = {
+                Integer.toString(pro.getId_producto()),
+                pro.getNombre(),
+                pro.getDescripcion(),
+                pro.getPrecio().toString()
+            };
+            modelo.addRow(renglon);
+        }
+        jTableproducto.setModel(modelo); // Se actualiza la tabla en la interfaz
+     }catch(Exception e) {
+            
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(rootPane, "Error al obtener los datos de productos.");
+    }
+    
+}
+         
+
+
+
+// Método para actualizar la información de un producto
     public void actualizarProducto() {
     int id=Integer.parseInt(this.jTextid_producto.getText());
      String nomb=this.jTextnombre.getText();       
@@ -95,6 +128,8 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
         jButtonEditar = new javax.swing.JButton();
         jButtonActualizar = new javax.swing.JButton();
         jButtonBorrar = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jTextBuscarPro = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableproducto = new javax.swing.JTable();
@@ -145,6 +180,15 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setText("Buscar");
+
+        jTextBuscarPro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextBuscarProKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -169,16 +213,27 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
                             .addComponent(jTextdescripcion)
                             .addComponent(jTextprecio))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 15, Short.MAX_VALUE)
-                        .addComponent(jButtonAgregar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonEditar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonActualizar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonBorrar)
-                        .addGap(38, 38, 38))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButtonAgregar)
+                                .addGap(18, 18, 18))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addComponent(jLabel5)
+                                .addGap(33, 33, 33)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jTextBuscarPro)
+                                .addGap(147, 147, 147))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButtonEditar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonActualizar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonBorrar)
+                                .addGap(38, 38, 38))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,6 +260,10 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
                     .addComponent(jButtonEditar)
                     .addComponent(jButtonActualizar)
                     .addComponent(jButtonBorrar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jTextBuscarPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -325,6 +384,27 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
          }
     }//GEN-LAST:event_jButtonBorrarActionPerformed
 
+    private void jTextBuscarProKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextBuscarProKeyReleased
+
+        String datoprod = jTextBuscarPro.getText().trim();
+
+        if(datoprod.isEmpty()) {
+            obtenerDatos();
+    // Si el campo está vacío, muestra todos los productos o un mensaje
+    System.out.println("El campo de búsqueda está vacío. Mostrando todos los productos.");
+} else {
+    try {
+         BusquedaProducto(datoprod);
+        int numeroProducto = Integer.parseInt(datoprod);
+        // Ahora puedes usar numeroProducto como un int
+    } catch (NumberFormatException e) {
+        System.out.println("El valor ingresado no es un número válido");
+    }       catch (SQLException ex) {
+                Logger.getLogger(NewJInternalProductos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+}
+    }//GEN-LAST:event_jTextBuscarProKeyReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonActualizar;
     private javax.swing.JButton jButtonAgregar;
@@ -334,10 +414,12 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableproducto;
+    private javax.swing.JTextField jTextBuscarPro;
     private javax.swing.JTextField jTextdescripcion;
     private javax.swing.JTextField jTextid_producto;
     private javax.swing.JTextField jTextnombre;

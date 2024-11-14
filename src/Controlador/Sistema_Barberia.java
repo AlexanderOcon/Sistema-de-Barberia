@@ -11,6 +11,8 @@ public class Sistema_Barberia extends javax.swing.JFrame {
     public Sistema_Barberia() {
         initComponents();
         setTitle("KING OF KING");
+        
+        
         Producto=new NewJInternalProductos();
          desktopPane.add( Producto);
          
