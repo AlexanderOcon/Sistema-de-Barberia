@@ -292,8 +292,7 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -385,24 +384,29 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonBorrarActionPerformed
 
     private void jTextBuscarProKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextBuscarProKeyReleased
+    // Obtiene el texto del campo de búsqueda y elimina espacios al inicio y al final
+    String datoprod = jTextBuscarPro.getText().trim();
 
-        String datoprod = jTextBuscarPro.getText().trim();
+    // Verifica si el campo de búsqueda está vacío
+    if (datoprod.isEmpty()) {
+        obtenerDatos();  // Llama al método para obtener todos los productos
+        System.out.println("El campo de búsqueda está vacío. Mostrando todos los productos.");
+    } else {
+        try {
+            // Llama al método de búsqueda usando el texto ingresado
+            BusquedaProducto(datoprod);
 
-        if(datoprod.isEmpty()) {
-            obtenerDatos();
-    // Si el campo está vacío, muestra todos los productos o un mensaje
-    System.out.println("El campo de búsqueda está vacío. Mostrando todos los productos.");
-} else {
-    try {
-         BusquedaProducto(datoprod);
-        int numeroProducto = Integer.parseInt(datoprod);
-        // Ahora puedes usar numeroProducto como un int
-    } catch (NumberFormatException e) {
-        System.out.println("El valor ingresado no es un número válido");
-    }       catch (SQLException ex) {
-                Logger.getLogger(NewJInternalProductos.class.getName()).log(Level.SEVERE, null, ex);
+            // Intenta convertir el texto ingresado a un número entero
+            int numeroProducto = Integer.parseInt(datoprod);
+            // Aquí se puede usar numeroProducto como un entero
+            }catch (NumberFormatException e) {
+            // Captura el error si el texto no es un número válido
+            System.out.println("El valor ingresado no es un número válido");
+            }catch (SQLException ex) {
+            // Captura y registra cualquier error de SQL que ocurra
+            Logger.getLogger(NewJInternalProductos.class.getName()).log(Level.SEVERE, null, ex);
             }
-}
+        }
     }//GEN-LAST:event_jTextBuscarProKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
