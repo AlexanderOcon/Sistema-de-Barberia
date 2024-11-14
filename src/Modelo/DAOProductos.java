@@ -69,7 +69,7 @@ public class DAOProductos {
                     (String) registro.get("nombre"), // Obtiene el nombre
                     (String) registro.get("descripcion"), // Obtiene la descripción
                     (float) registro.get("precio") // Obtiene el precio
-            );
+            ); 
             productos.add(pro); // Agrega el producto a la lista
         }
         return productos; // Retorna la lista de productos
