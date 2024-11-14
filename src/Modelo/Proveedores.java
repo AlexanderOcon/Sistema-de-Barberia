@@ -1,5 +1,6 @@
 package Modelo;
 
+import java.sql.Date;
 
 public class Proveedores {
   private int id_proveedor; 
