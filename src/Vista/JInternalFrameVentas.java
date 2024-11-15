@@ -8,66 +8,61 @@ import javax.swing.JOptionPane;
 
 public class JInternalFrameVentas extends javax.swing.JInternalFrame {
 
- 
     public JInternalFrameVentas() {
         initComponents();
         jTextIdVenta.setEnabled(false);//deshabilitar campo de idventa
-        }
+    }
 
-    
-    public void LimpiarCampos(){
-      jTextIdVenta.setText(""); 
-      jTextidCliente.setText(""); 
-      jTextidEmpleado.setText(""); 
-      jTextMetodoPago.setText(""); 
-     jTextfechaVenta.setText(""); 
-   }
-    
+    public void LimpiarCampos() {
+        jTextIdVenta.setText("");
+        jTextidCliente.setText("");
+        jTextidEmpleado.setText("");
+        jTextMetodoPago.setText("");
+        jTextfechaVenta.setText("");
+    }
+
     //Método para listar datos dentro de la tabla
-    public void obtenerDatos(){
-     //Se crea una lista que almacena los datos obtenidos
-       List<Ventas> Ventas = new DAOVentas().ObtenerDatos();
-    //Define un modelo para la tabla    
-         DefaultTableModel modelo= new DefaultTableModel();
-     //Arreglo con nombre de columnas de la tabla
-        String[] columnas={"id_venta", "id_cliente", "id_empleado",
-      "metodopagoV", "fecha_venta"};   
-    //Establece los nombres definidos de las columnas
-          modelo.setColumnIdentifiers (columnas);
-    for (Ventas ven:Ventas) { //Recorre cada elemento de la lista y los agrega 
-    //al modelo de la tabla
-        String[] renglon = {
-            Integer.toString(ven.getId_venta()),
-            Integer.toString(ven.getId_cliente()),       
-            Integer.toString(ven.getId_empleado()),
-            ven.getMetodopagoV(),
-            ven.getFecha_venta().toString() };
-            modelo.addRow(renglon);  
-         }
-    jTableVentas.setModel (modelo); 
-}   
+    public void obtenerDatos() {
+        //Se crea una lista que almacena los datos obtenidos
+        List<Ventas> Ventas = new DAOVentas().ObtenerDatos();
+        //Define un modelo para la tabla    
+        DefaultTableModel modelo = new DefaultTableModel();
+        //Arreglo con nombre de columnas de la tabla
+        String[] columnas = {"id_venta", "id_cliente", "id_empleado",
+            "metodopagoV", "fecha_venta"};
+        //Establece los nombres definidos de las columnas
+        modelo.setColumnIdentifiers(columnas);
+        for (Ventas ven : Ventas) { //Recorre cada elemento de la lista y los agrega 
+            //al modelo de la tabla
+            String[] renglon = {
+                Integer.toString(ven.getId_venta()),
+                Integer.toString(ven.getId_cliente()),
+                Integer.toString(ven.getId_empleado()),
+                ven.getMetodopagoV(),
+                ven.getFecha_venta().toString()};
+            modelo.addRow(renglon);
+        }
+        jTableVentas.setModel(modelo);
+    }
 
     public void Actualizar() {
-       int id = Integer.parseInt(this.jTextIdVenta.getText());
-       int cli = Integer.parseInt(this.jTextidCliente.getText()); 
-       int emp = Integer.parseInt(this.jTextidEmpleado.getText());
+        int id = Integer.parseInt(this.jTextIdVenta.getText());
+        int cli = Integer.parseInt(this.jTextidCliente.getText());
+        int emp = Integer.parseInt(this.jTextidEmpleado.getText());
 
-       String pago = this.jTextMetodoPago.getText(); 
-       Date fech = Date.valueOf(this.jTextfechaVenta.getText()); 
+        String pago = this.jTextMetodoPago.getText();
+        Date fech = Date.valueOf(this.jTextfechaVenta.getText());
 
-       DAOVentas dao = new DAOVentas();
-       int res = dao.Actualizar(id, cli, emp, pago, fech.toString());
-       //fech.toString para pasar la fecha en formato String
-       if (res == 1) {
-           JOptionPane.showMessageDialog(rootPane, "¡Venta Actualizada!");
-       }else{
-           JOptionPane.showMessageDialog(rootPane, "¡Ocurrió un ERROR!");
+        DAOVentas dao = new DAOVentas();
+        int res = dao.Actualizar(id, cli, emp, pago, fech.toString());
+        //fech.toString para pasar la fecha en formato String
+        if (res == 1) {
+            JOptionPane.showMessageDialog(rootPane, "¡Venta Actualizada!");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "¡Ocurrió un ERROR!");
+        }
     }
-}
-    
- 
-    
- 
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -326,53 +321,51 @@ public class JInternalFrameVentas extends javax.swing.JInternalFrame {
 
     private void jBAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarActionPerformed
 // Captura datos de la cajas de texto
-        String cli=jTextidCliente.getText();
-        String emp=jTextidEmpleado.getText();
-        String pago=jTextMetodoPago.getText();
-        String fech=jTextfechaVenta.getText();
-     
+        String cli = jTextidCliente.getText();
+        String emp = jTextidEmpleado.getText();
+        String pago = jTextMetodoPago.getText();
+        String fech = jTextfechaVenta.getText();
+
         //Comprueba que las cajas de texto no esten vacías
-        if (cli.contentEquals("") ||emp.contentEquals("") ||
-            pago.contentEquals("") || fech.contentEquals("")) {
+        if (cli.contentEquals("") || emp.contentEquals("")
+                || pago.contentEquals("") || fech.contentEquals("")) {
             JOptionPane.showMessageDialog(rootPane,
-                "Todos los campos son obligatorios");
-        }else{
-            try{
-                int c=Integer.parseInt(cli);
-                int em=Integer.parseInt(emp);
-                java.sql.Date fe=java.sql.Date.valueOf(fech);
+                    "Todos los campos son obligatorios");
+        } else {
+            try {
+                int c = Integer.parseInt(cli);
+                int em = Integer.parseInt(emp);
+                java.sql.Date fe = java.sql.Date.valueOf(fech);
                 //objeto para acceder al método Insertar de DAOVenta
-               Ventas ven= new DAOVentas().Insertar(c, em, pago, fe);
+                Ventas ven = new DAOVentas().Insertar(c, em, pago, fe);
                 JOptionPane.showMessageDialog(rootPane, "Registro agregado");
-            }catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(rootPane, "No se agregó el registro");
             }
         }
-        obtenerDatos ();
-        LimpiarCampos();    
+        obtenerDatos();
+        LimpiarCampos();
     }//GEN-LAST:event_jBAgregarActionPerformed
 
     private void jBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarActionPerformed
-        int filas=this.jTableVentas.getSelectedRow();
+        int filas = this.jTableVentas.getSelectedRow();
 
-        if(filas==-1){
+        if (filas == -1) {
             JOptionPane.showConfirmDialog(rootPane, "Seleccione un Dato de la Tabla");
-        }
+        } else {
+            try {
+                int id = Integer.parseInt((String) this.jTableVentas.getValueAt(filas, 0).toString());
+                String nom = (String) this.jTableVentas.getValueAt(filas, 1);
+                String des = (String) this.jTableVentas.getValueAt(filas, 2);
+                String prec = (String) this.jTableVentas.getValueAt(filas, 3);
 
-        else{
-            try{
-                int id=Integer.parseInt((String)this.jTableVentas.getValueAt(filas, 0).toString());
-                String nom=(String)this.jTableVentas.getValueAt(filas, 1);
-                String des=(String)this.jTableVentas.getValueAt(filas, 2);
-                String prec=(String)this.jTableVentas.getValueAt(filas, 3);
-
-                jTextIdVenta.setText(""+id);
+                jTextIdVenta.setText("" + id);
                 jTextidCliente.setText(nom);
                 jTextidEmpleado.setText(des);
                 jTextMetodoPago.setText(prec);
 
-            }catch(NumberFormatException e){
+            } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
         }
@@ -381,19 +374,19 @@ public class JInternalFrameVentas extends javax.swing.JInternalFrame {
     private void jBActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActualizarActionPerformed
         Actualizar();
         obtenerDatos();
-        LimpiarCampos(); 
+        LimpiarCampos();
     }//GEN-LAST:event_jBActualizarActionPerformed
 
     private void jBBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBorrarActionPerformed
-        int fila=this.jTableVentas.getSelectedRow();   
-             if (fila==-1){
-             JOptionPane.showMessageDialog(rootPane, "Seleccione un registro de la tabla");    
-        }else{
-            int id=Integer.parseInt((String) this.jTableVentas.getValueAt (fila, 0).toString());
-            DAOVentas dao=new DAOVentas();
-            dao.Eliminar (id);
-            obtenerDatos ();
-         }
+        int fila = this.jTableVentas.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(rootPane, "Seleccione un registro de la tabla");
+        } else {
+            int id = Integer.parseInt((String) this.jTableVentas.getValueAt(fila, 0).toString());
+            DAOVentas dao = new DAOVentas();
+            dao.Eliminar(id);
+            obtenerDatos();
+        }
     }//GEN-LAST:event_jBBorrarActionPerformed
 
 

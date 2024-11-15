@@ -1,68 +1,62 @@
 package Vista;
+
 import Modelo.*;
 import java.util.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
-/**
- *
- * @author Usuario
- */
+
 public class NewJInternalEmpleados extends javax.swing.JInternalFrame {
 
-   
     public NewJInternalEmpleados() {
-         initComponents();
-           jTextidEmpleado.setEnabled(false);//deshabilitar campo de idEmpleado
+        initComponents();
+        jTextidEmpleado.setEnabled(false);//deshabilitar campo de idEmpleado
     }
-    
-    public void LimpiarCampos(){
-       jTextidEmpleado.setText(""); 
-       jTextNombre.setText(""); 
-       jTextTelefono.setText(""); 
-       jTextEmail.setText(""); 
-       jTextDireccion.setText(""); 
-       }
+
+    public void LimpiarCampos() {
+        jTextidEmpleado.setText("");
+        jTextNombre.setText("");
+        jTextTelefono.setText("");
+        jTextEmail.setText("");
+        jTextDireccion.setText("");
+    }
 
     //Método para listar datos dentro de la tabla
-    public void obtenerDatos(){
-     //Se crea una lista que almacena los datos obtenidos
-       List<Empleados> empleados = new DAOEmpleados().ObtenerDatos();
-    //Define un modelo para la tabla    
-         DefaultTableModel modelo= new DefaultTableModel();
-     //Arreglo con nombre de columnas de la tabla
-        String[] columnas={"idEmpleado", "nombre", "telefono",
-      "email", "direccion"};   
-    //Establece los nombres definidos de las columnas
-          modelo.setColumnIdentifiers (columnas);
-    for (Empleados au:empleados) { //Recorre cada elemento de la lista y los agrega 
-    //al modelo de la tabla
-        String[] renglon={Integer.toString(au.getIdEmpleado()), au.getNombre(),
-       au.getTelefono(),au.getEmail(),  au.getDireccion().toString() };
-        modelo.addRow(renglon);   
+    public void obtenerDatos() {
+        //Se crea una lista que almacena los datos obtenidos
+        List<Empleados> empleados = new DAOEmpleados().ObtenerDatos();
+        //Define un modelo para la tabla    
+        DefaultTableModel modelo = new DefaultTableModel();
+        //Arreglo con nombre de columnas de la tabla
+        String[] columnas = {"idEmpleado", "nombre", "telefono",
+            "email", "direccion"};
+        //Establece los nombres definidos de las columnas
+        modelo.setColumnIdentifiers(columnas);
+        for (Empleados au : empleados) { //Recorre cada elemento de la lista y los agrega 
+            //al modelo de la tabla
+            String[] renglon = {Integer.toString(au.getIdEmpleado()), au.getNombre(),
+                au.getTelefono(), au.getEmail(), au.getDireccion().toString()};
+            modelo.addRow(renglon);
+        }
+        jTableEmpleados.setModel(modelo);
+        // Ubica los datos del modelo en la tabla
     }
-    jTableEmpleados.setModel (modelo); 
-    // Ubica los datos del modelo en la tabla
-}
 
-public void actualizar() {
-    int id=Integer.parseInt(this.jTextidEmpleado.getText());
-     String nom=this.jTextNombre.getText();       
-    String ape=this.jTextTelefono.getText();        
-     String corr=this.jTextEmail.getText();       
-     String dire=this.jTextDireccion.getText();
-          
-     DAOEmpleados dao=new DAOEmpleados();
-     int res=dao.Actualizar (id, nom, ape, corr, dire);
-     if (res ==1) {
-         JOptionPane.showMessageDialog(rootPane, "Empleado Actualizado!");
-     }else{
-         JOptionPane.showMessageDialog(rootPane, "¡Ocurrió un ERROR!");
-    }   
-}
+    public void actualizar() {
+        int id = Integer.parseInt(this.jTextidEmpleado.getText());
+        String nom = this.jTextNombre.getText();
+        String ape = this.jTextTelefono.getText();
+        String corr = this.jTextEmail.getText();
+        String dire = this.jTextDireccion.getText();
 
+        DAOEmpleados dao = new DAOEmpleados();
+        int res = dao.Actualizar(id, nom, ape, corr, dire);
+        if (res == 1) {
+            JOptionPane.showMessageDialog(rootPane, "Empleado Actualizado!");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "¡Ocurrió un ERROR!");
+        }
+    }
 
- 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -308,76 +302,75 @@ public void actualizar() {
     }//GEN-LAST:event_jTextEmailActionPerformed
 
     private void jBAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarActionPerformed
-     // Captura datos de la cajas de texto
-        String nomb=jTextNombre.getText();
-        String tele=jTextTelefono.getText();
-        String ema=jTextEmail.getText();
-        String dire=jTextDireccion.getText();
-     
+        // Captura datos de la cajas de texto
+        String nomb = jTextNombre.getText();
+        String tele = jTextTelefono.getText();
+        String ema = jTextEmail.getText();
+        String dire = jTextDireccion.getText();
+
         //Comprueba que las cajas de texto no esten vacías
-        if (nomb.contentEquals("") ||ema.contentEquals("") ||
-            ema.contentEquals("") || dire.contentEquals("")) {
+        if (nomb.contentEquals("") || ema.contentEquals("")
+                || ema.contentEquals("") || dire.contentEquals("")) {
             JOptionPane.showMessageDialog(rootPane,
-                "Todos los campos son obligatorios");
-        }else{
-            try{
-                
+                    "Todos los campos son obligatorios");
+        } else {
+            try {
+
                 //objeto para acceder al método Insertar de DAOAutor
-                Empleados au=new DAOEmpleados().Insertar( nomb, tele, ema, dire);
+                Empleados au = new DAOEmpleados().Insertar(nomb, tele, ema, dire);
                 JOptionPane.showMessageDialog(rootPane, "Registro agregado");
-            }catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(rootPane, "No se agregó el registro");
             }
         }
-        obtenerDatos ();//1lama a este método para que se muestre el nuevo
+        obtenerDatos();//1lama a este método para que se muestre el nuevo
         //registro en la tabla del formulario
         LimpiarCampos();
     }//GEN-LAST:event_jBAgregarActionPerformed
 
     private void jBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarActionPerformed
-       int fila=this.jTableEmpleados.getSelectedRow();//Se obtiene #fila seleccionado
-            if (fila==-1) {
-                JOptionPane.showMessageDialog(rootPane, "Seleccione un registro de la tabla");
-            }
-            else{ //Se toma cada campo de la tabla del registro seleccionado
-                // y se asgina a una variable
-                try{
-                    int id=Integer.parseInt((String) this.jTableEmpleados.getValueAt (fila, 0).toString());
-                    String nom=(String) this.jTableEmpleados.getValueAt (fila,1);
-                    String tele=(String) this.jTableEmpleados.getValueAt (fila, 2);
-                    String ema=(String) this.jTableEmpleados.getValueAt (fila,3);
-                    String dire=(String) this.jTableEmpleados.getValueAt (fila, 4);
-                    
-                    //Se ubican en las cajas de textos los datos capturados de la tabla
-                    jTextidEmpleado.setText(""+id);
-                    jTextNombre.setText(nom);
-                    jTextTelefono.setText (tele);
-                    jTextEmail.setText(ema);
-                    jTextDireccion.setText(dire);
-                 
-                }catch (NumberFormatException e) {
-                    e.printStackTrace();
+        int fila = this.jTableEmpleados.getSelectedRow();//Se obtiene #fila seleccionado
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(rootPane, "Seleccione un registro de la tabla");
+        } else { //Se toma cada campo de la tabla del registro seleccionado
+            // y se asgina a una variable
+            try {
+                int id = Integer.parseInt((String) this.jTableEmpleados.getValueAt(fila, 0).toString());
+                String nom = (String) this.jTableEmpleados.getValueAt(fila, 1);
+                String tele = (String) this.jTableEmpleados.getValueAt(fila, 2);
+                String ema = (String) this.jTableEmpleados.getValueAt(fila, 3);
+                String dire = (String) this.jTableEmpleados.getValueAt(fila, 4);
+
+                //Se ubican en las cajas de textos los datos capturados de la tabla
+                jTextidEmpleado.setText("" + id);
+                jTextNombre.setText(nom);
+                jTextTelefono.setText(tele);
+                jTextEmail.setText(ema);
+                jTextDireccion.setText(dire);
+
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
             }
         }
     }//GEN-LAST:event_jBEditarActionPerformed
 
     private void jBEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditar1ActionPerformed
-       actualizar();
-       obtenerDatos();
-       LimpiarCampos();
+        actualizar();
+        obtenerDatos();
+        LimpiarCampos();
     }//GEN-LAST:event_jBEditar1ActionPerformed
 
     private void jBBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBorrarActionPerformed
-      
-      int fila=this.jTableEmpleados.getSelectedRow();   
-        if (fila==-1){
-            JOptionPane.showMessageDialog(rootPane, "Seleccione un registro de la tabla");    
-        }else{
-            int id=Integer.parseInt((String) this.jTableEmpleados.getValueAt (fila, 0).toString());
-            DAOEmpleados dao=new DAOEmpleados();
-            dao.Eliminar (id);
-            obtenerDatos ();
+
+        int fila = this.jTableEmpleados.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(rootPane, "Seleccione un registro de la tabla");
+        } else {
+            int id = Integer.parseInt((String) this.jTableEmpleados.getValueAt(fila, 0).toString());
+            DAOEmpleados dao = new DAOEmpleados();
+            dao.Eliminar(id);
+            obtenerDatos();
         }
     }//GEN-LAST:event_jBBorrarActionPerformed
 

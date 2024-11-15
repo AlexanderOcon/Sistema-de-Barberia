@@ -3,12 +3,13 @@ package Modelo;
 import java.sql.Date;
 
 public class Proveedores {
-  private int id_proveedor; 
-  private String Nombre;   
-  private String Apellido;  
-  private String Email;   
-  private String Telefono;  
-  private String Url;  
+
+    private int id_proveedor;
+    private String Nombre;
+    private String Apellido;
+    private String Email;
+    private String Telefono;
+    private String Url;
 
     public Proveedores(int id_proveedor, String Nombre, String Apellido, String Email, String Telefono, String Url) {
         this.id_proveedor = id_proveedor;
@@ -74,6 +75,5 @@ public class Proveedores {
     public void setUrl(String Url) {
         this.Url = Url;
     }
-  
-    
+
 }

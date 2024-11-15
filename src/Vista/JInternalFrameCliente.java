@@ -1,4 +1,3 @@
-
 package Vista;
 
 import Modelo.*;
@@ -9,59 +8,53 @@ import javax.swing.JOptionPane;
 public class JInternalFrameCliente extends javax.swing.JInternalFrame {
 
     //deshabilitar campo de IdAutor
-   public JInternalFrameCliente() {
-   initComponents();
-   jTextFieldId.setEnabled(false);
-}
-
-    public void LimpiarCampos(){
-        jTextFieldId.setText(""); 
-        jTextFieldNombre.setText(""); 
-        jTextFieldTelefono.setText(""); 
-        jTextFieldApellidos.setText(""); 
-}
-   
-    public void obtenerDatos(){
-     //Se crea una lista que almacena los datos obtenidos
-       List<Cliente> Cliente = new DAOCliente().ObtenerDatos();
-    //Define un modelo para la tabla    
-         DefaultTableModel modelo= new DefaultTableModel();
-     //Arreglo con nombre de columnas de la tabla
-        String[] columnas={"id_ciente", "nombre", "apellido",
-      "telefono"};   
-    //Establece los nombres definidos de las columnas
-          modelo.setColumnIdentifiers (columnas);
-    for (Cliente au:Cliente) { //Recorre cada elemento de la lista y los agrega 
-    //al modelo de la tabla
-        String[] renglon={Integer.toString(au.getId_cliente()), au.getNombre(),
-        au.getApellido(),  au.getTelefono() };
-        modelo.addRow(renglon);   
-    jTableCliente.setModel (modelo); 
-    // Ubica los datos del modelo en la tabla
+    public JInternalFrameCliente() {
+        initComponents();
+        jTextFieldId.setEnabled(false);
     }
-}
 
+    public void LimpiarCampos() {
+        jTextFieldId.setText("");
+        jTextFieldNombre.setText("");
+        jTextFieldTelefono.setText("");
+        jTextFieldApellidos.setText("");
+    }
 
+    public void obtenerDatos() {
+        //Se crea una lista que almacena los datos obtenidos
+        List<Cliente> Cliente = new DAOCliente().ObtenerDatos();
+        //Define un modelo para la tabla    
+        DefaultTableModel modelo = new DefaultTableModel();
+        //Arreglo con nombre de columnas de la tabla
+        String[] columnas = {"id_ciente", "nombre", "apellido",
+            "telefono"};
+        //Establece los nombres definidos de las columnas
+        modelo.setColumnIdentifiers(columnas);
+        for (Cliente au : Cliente) { //Recorre cada elemento de la lista y los agrega 
+            //al modelo de la tabla
+            String[] renglon = {Integer.toString(au.getId_cliente()), au.getNombre(),
+                au.getApellido(), au.getTelefono()};
+            modelo.addRow(renglon);
+            jTableCliente.setModel(modelo);
+            // Ubica los datos del modelo en la tabla
+        }
+    }
 
+    public void actualizarCliente() {
 
- public void actualizarCliente() {
-     
-    int id=Integer.parseInt(this.jTextFieldId.getText());
-        String nom=this.jTextFieldNombre.getText();
-        String ape=this.jTextFieldApellidos.getText();
-        String tele=this.jTextFieldTelefono.getText();
-        DAOCliente dao=new DAOCliente();
-        int res=dao.Actualizar(id, nom, ape, tele);
-    if (res==1){
+        int id = Integer.parseInt(this.jTextFieldId.getText());
+        String nom = this.jTextFieldNombre.getText();
+        String ape = this.jTextFieldApellidos.getText();
+        String tele = this.jTextFieldTelefono.getText();
+        DAOCliente dao = new DAOCliente();
+        int res = dao.Actualizar(id, nom, ape, tele);
+        if (res == 1) {
             JOptionPane.showMessageDialog(rootPane, "Cliente actualizado");
-    }else{
+        } else {
             JOptionPane.showMessageDialog(rootPane, "Ocurrio un Error");
+        }
     }
-}
 
-
- 
- 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -296,18 +289,18 @@ public class JInternalFrameCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextFieldApellidosActionPerformed
 
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
-     // Captura datos de la cajas de texto
-        String nomb=jTextFieldNombre.getText();
-         String ape=jTextFieldApellidos.getText();
-          String tele=jTextFieldTelefono.getText();
-        if(nomb.contentEquals("")|| ape.contentEquals("")|| tele.contentEquals("")){
+        // Captura datos de la cajas de texto
+        String nomb = jTextFieldNombre.getText();
+        String ape = jTextFieldApellidos.getText();
+        String tele = jTextFieldTelefono.getText();
+        if (nomb.contentEquals("") || ape.contentEquals("") || tele.contentEquals("")) {
             JOptionPane.showConfirmDialog(rootPane, "Llenar Todos los Campos");
-        }else{
-            try{ 
-                 //objeto para acceder al método Insertar de DAOAutor
-                Cliente au=new DAOCliente().Insertar( nomb, ape, tele);
+        } else {
+            try {
+                //objeto para acceder al método Insertar de DAOAutor
+                Cliente au = new DAOCliente().Insertar(nomb, ape, tele);
                 JOptionPane.showMessageDialog(rootPane, "Registro agregado");
-            }catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(rootPane, "No se agregó el registro");
             }
@@ -318,23 +311,23 @@ public class JInternalFrameCliente extends javax.swing.JInternalFrame {
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
         // TODO add your handling code here:
-        int fila=this.jTableCliente.getSelectedRow();
-        
-        if(fila==-1){
-            JOptionPane.showMessageDialog(rootPane, "seleccionar un registro de la tabla");
-        }else{
-            try{
-                int id=Integer.parseInt((String)this.jTableCliente.getValueAt(fila, 0).toString());
-                String nom=(String)this.jTableCliente.getValueAt(fila, 1);
-                String ape=(String)this.jTableCliente.getValueAt(fila, 2);
-                String tele=(String)this.jTableCliente.getValueAt(fila, 3);
-                
-                jTextFieldId.setText(""+id);
-                 jTextFieldNombre.setText(nom);
-                  jTextFieldApellidos.setText(ape);
-                  jTextFieldTelefono.setText(tele);
+        int fila = this.jTableCliente.getSelectedRow();
 
-            }catch(NumberFormatException e){
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(rootPane, "seleccionar un registro de la tabla");
+        } else {
+            try {
+                int id = Integer.parseInt((String) this.jTableCliente.getValueAt(fila, 0).toString());
+                String nom = (String) this.jTableCliente.getValueAt(fila, 1);
+                String ape = (String) this.jTableCliente.getValueAt(fila, 2);
+                String tele = (String) this.jTableCliente.getValueAt(fila, 3);
+
+                jTextFieldId.setText("" + id);
+                jTextFieldNombre.setText(nom);
+                jTextFieldApellidos.setText(ape);
+                jTextFieldTelefono.setText(tele);
+
+            } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
         }
@@ -351,17 +344,17 @@ public class JInternalFrameCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
     private void jButtonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarActionPerformed
-       
+
         // TODO add your handling code here:
-        int fila=this.jTableCliente.getSelectedRow();
-        if (fila==1){
-        JOptionPane.showMessageDialog(rootPane, "Seleccione un registro de la tabla");    
-        }else {
-            int id=Integer.parseInt((String) this.jTableCliente.getValueAt (fila, 0).toString());
-            DAOCliente dao=new DAOCliente();
-            dao.Eliminar (id);
-            obtenerDatos ();
-         }
+        int fila = this.jTableCliente.getSelectedRow();
+        if (fila == 1) {
+            JOptionPane.showMessageDialog(rootPane, "Seleccione un registro de la tabla");
+        } else {
+            int id = Integer.parseInt((String) this.jTableCliente.getValueAt(fila, 0).toString());
+            DAOCliente dao = new DAOCliente();
+            dao.Eliminar(id);
+            obtenerDatos();
+        }
     }//GEN-LAST:event_jButtonBorrarActionPerformed
 
 

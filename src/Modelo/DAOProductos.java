@@ -3,10 +3,10 @@ package Modelo;
 import java.util.*;
 
 public class DAOProductos {
-    
+
     // Método para insertar un nuevo producto en la base de datos
     public Productos Insertar(String nombre, String descripcion, Float precio) {
-         // Consulta SQL para insertar el producto con nombre, descripción y precio 
+        // Consulta SQL para insertar el producto con nombre, descripción y precio 
         String transaccion = "INSERT INTO Productos(nombre, descripcion, precio) VALUES ('"
                 + nombre + "','"
                 + descripcion + "',"
@@ -17,29 +17,28 @@ public class DAOProductos {
         }
         return null; // Si falla, retorna null
     }
-    
+
     // Método para actualizar los datos de un producto existente en la base de datos
     public int Actualizar(int id_producto, String nombre, String descripcion, Float precio) {
-         // Consulta SQL para actualizar el nombre, descripción y precio del producto con id específico
+        // Consulta SQL para actualizar el nombre, descripción y precio del producto con id específico
         String transaccion = "UPDATE Productos SET nombre='"
                 + nombre + "', descripcion='"
                 + descripcion + "', precio="
                 + precio + " WHERE id_producto="
                 + id_producto;
-        
+
         // Ejecuta la consulta de actualización 
         return new DataBase().Actualizar(transaccion);
     }
-    
+
     // Método para obtener todos los productos de la base de datos
-    public List <Productos> ObtenerDatos() {
+    public List<Productos> ObtenerDatos() {
         String transaccion = "SELECT * FROM Productos";
-        
+
         // Lista de registros obtenidos de la base de datos
         List<Map<String, Object>> registros = new DataBase().Listar(transaccion);
         List<Productos> productos = new ArrayList<>();
-        
-        
+
         // Recorre cada registro y lo convierte en un objeto Productos
         for (Map<String, Object> registro : registros) {
             Productos pro;
@@ -53,7 +52,7 @@ public class DAOProductos {
         }
         return productos; // Retorna la lista de productos
     }
-    
+
     // Método para eliminar un producto de la base de datos por su ID
     public int Eliminar(int id_producto) {
         // Consulta SQL para eliminar el producto con el ID especificado
@@ -61,4 +60,3 @@ public class DAOProductos {
         return new DataBase().Actualizar(transaccion); // Ejecuta la consulta de eliminación
     }
 }
-

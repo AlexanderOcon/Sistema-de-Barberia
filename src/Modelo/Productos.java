@@ -1,12 +1,12 @@
 package Modelo;
 
-
 public class Productos {
+
     private int id_producto;
     private String nombre;
     private String descripcion;
     private Float precio;
-  // Dos constructores y get and set
+    // Dos constructores y get and set
 
     public Productos(int id_producto, String nombre, String descripcion, Float precio) {
         this.id_producto = id_producto;
@@ -52,5 +52,5 @@ public class Productos {
     public void setPrecio(Float precio) {
         this.precio = precio;
     }
-   
+
 }

@@ -1,85 +1,78 @@
 package Vista;
 
 import Modelo.*;
-import java.sql.Connection;
 import java.util.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
-
-
 
 public class NewJInternalProductos extends javax.swing.JInternalFrame {
 
     // Constructor que deshabilita el campo de ID de producto
     public NewJInternalProductos() {
-        initComponents();      
+        initComponents();
         jTextid_producto.setEnabled(false); // El ID se genera automáticamente, así que se deshabilita
     }
-    
-    
+
     // Método para limpiar los campos de texto
-    public void LimpiarCampos(){
+    public void LimpiarCampos() {
         jTextid_producto.setText("");
         jTextnombre.setText("");
         jTextdescripcion.setText("");
         jTextprecio.setText("");
     }
-    
-    
+
     // Método para obtener y mostrar todos los productos en la tabla
-   public void obtenerDatos(){       
-    try {
-        
-        // Se obtiene una lista de productos de la base de datos
-        List <Productos> productos = new DAOProductos().ObtenerDatos();
-        DefaultTableModel modelo = new DefaultTableModel();
-        
-        // Se definen las columnas de la tabla
-        String[] columnas = {"id_producto", "nombre", "descripcion", "precio"};
-        modelo.setColumnIdentifiers(columnas);
-        
-        // Se llena la tabla con los datos de cada producto
-        for(Productos pro : productos){
-            String[] renglon = {
-                Integer.toString(pro.getId_producto()),
-                pro.getNombre(),
-                pro.getDescripcion(),
-                pro.getPrecio().toString()
-            };
-            modelo.addRow(renglon);
+    public void obtenerDatos() {
+        try {
+
+            // Se obtiene una lista de productos de la base de datos
+            List<Productos> productos = new DAOProductos().ObtenerDatos();
+            DefaultTableModel modelo = new DefaultTableModel();
+
+            // Se definen las columnas de la tabla
+            String[] columnas = {"id_producto", "nombre", "descripcion", "precio"};
+            modelo.setColumnIdentifiers(columnas);
+
+            // Se llena la tabla con los datos de cada producto
+            for (Productos pro : productos) {
+                String[] renglon = {
+                    Integer.toString(pro.getId_producto()),
+                    pro.getNombre(),
+                    pro.getDescripcion(),
+                    pro.getPrecio().toString()
+                };
+                modelo.addRow(renglon);
+            }
+            jTableproducto.setModel(modelo); // Se actualiza la tabla en la interfaz
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(rootPane, "Error al obtener los datos de productos.");
         }
-        jTableproducto.setModel(modelo); // Se actualiza la tabla en la interfaz
-        
-    }catch(Exception e) {
-            
-        e.printStackTrace();
-        JOptionPane.showMessageDialog(rootPane, "Error al obtener los datos de productos.");
+
     }
-    
-}
-         
-
-
 
 // Método para actualizar la información de un producto
     public void actualizarProducto() {
-    int id=Integer.parseInt(this.jTextid_producto.getText());
-     String nomb=this.jTextnombre.getText();       
-     String desc=this.jTextdescripcion.getText();        
-     float prec=Float.parseFloat(this.jTextprecio.getText());
-     
-     // Actualiza el producto en la base de datos
-     DAOProductos dao=new DAOProductos();
-     int res=dao.Actualizar (id, nomb, desc, prec);
-     
-     // Muestra un mensaje según el resultado de la actualización
-     if (res ==1) {
-         JOptionPane.showMessageDialog(rootPane, "Producto Actualizado!");
-     }else{
-         JOptionPane.showMessageDialog(rootPane, "¡Ocurrió un ERROR!");
-     }  
-     
-}
+        int id = Integer.parseInt(this.jTextid_producto.getText());
+        String nomb = this.jTextnombre.getText();
+        String desc = this.jTextdescripcion.getText();
+        float prec = Float.parseFloat(this.jTextprecio.getText());
+
+        // Actualiza el producto en la base de datos
+        DAOProductos dao = new DAOProductos();
+        int res = dao.Actualizar(id, nomb, desc, prec);
+
+        // Muestra un mensaje según el resultado de la actualización
+        if (res == 1) {
+            JOptionPane.showMessageDialog(rootPane, "Producto Actualizado!");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "¡Ocurrió un ERROR!");
+        }
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -282,20 +275,20 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 // Método llamado al hacer clic en "Agregar" para insertar un nuevo producto
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
-        String nomb=jTextnombre.getText();
-        String desc=jTextdescripcion.getText();
-        float prec=Float.parseFloat(this.jTextprecio.getText());
-        
+        String nomb = jTextnombre.getText();
+        String desc = jTextdescripcion.getText();
+        float prec = Float.parseFloat(this.jTextprecio.getText());
+
         // Valida que los campos no estén vacíos
-        if (nomb.contentEquals("")|| desc.contentEquals("")|| prec==0){
-             JOptionPane.showMessageDialog(rootPane,
-                "Todos los campos son obligatorios");
-        }else{
-            try{
-                Productos pro=new DAOProductos().Insertar(nomb, desc, prec);
-                 JOptionPane.showMessageDialog(rootPane, "Registro agregado");
-            }catch(Exception e){
-                 e.printStackTrace();
+        if (nomb.contentEquals("") || desc.contentEquals("") || prec == 0) {
+            JOptionPane.showMessageDialog(rootPane,
+                    "Todos los campos son obligatorios");
+        } else {
+            try {
+                Productos pro = new DAOProductos().Insertar(nomb, desc, prec);
+                JOptionPane.showMessageDialog(rootPane, "Registro agregado");
+            } catch (Exception e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(rootPane, "No se agregó el registro");
             }
         }
@@ -305,30 +298,28 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
 
     // Método para llenar los campos con los datos del producto seleccionado en la tabla para editarlo
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
-         int fila=this.jTableproducto.getSelectedRow();//Se obtiene la fila seleccionada
-            if (fila==-1) {
-                JOptionPane.showMessageDialog(rootPane, "Seleccione un registro de la tabla");
-            }
-                        else{ //Se toma cada campo de la tabla del registro seleccionado
-                // y se asgina a una variable
-                try{
-                    // Captura los datos del producto seleccionado
-                    int id=Integer.parseInt((String) this.jTableproducto.getValueAt (fila, 0).toString());
-                    String nomb=(String) this.jTableproducto.getValueAt (fila,1);
-                    String desc=(String) this.jTableproducto.getValueAt (fila, 2);
-                    String prec=(String) this.jTableproducto.getValueAt (fila,3);
-                    
-                    // Muestra los datos en los campos de texto para su edición
-                    jTextid_producto.setText(""+id);
-                    jTextnombre.setText(nomb);
-                    jTextdescripcion.setText (desc);
-                    jTextprecio.setText(prec);
+        int fila = this.jTableproducto.getSelectedRow();//Se obtiene la fila seleccionada
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(rootPane, "Seleccione un registro de la tabla");
+        } else { //Se toma cada campo de la tabla del registro seleccionado
+            // y se asgina a una variable
+            try {
+                // Captura los datos del producto seleccionado
+                int id = Integer.parseInt((String) this.jTableproducto.getValueAt(fila, 0).toString());
+                String nomb = (String) this.jTableproducto.getValueAt(fila, 1);
+                String desc = (String) this.jTableproducto.getValueAt(fila, 2);
+                String prec = (String) this.jTableproducto.getValueAt(fila, 3);
 
-                 
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
-                }
+                // Muestra los datos en los campos de texto para su edición
+                jTextid_producto.setText("" + id);
+                jTextnombre.setText(nomb);
+                jTextdescripcion.setText(desc);
+                jTextprecio.setText(prec);
+
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
             }
+        }
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
     // Método llamado al hacer clic en "Actualizar" para guardar los cambios en el producto
@@ -340,19 +331,19 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
 
     // Método llamado al hacer clic en "Borrar" para eliminar el producto seleccionado
     private void jButtonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarActionPerformed
-        int fila=this.jTableproducto.getSelectedRow();   
-      if (fila==-1){
-      JOptionPane.showMessageDialog(rootPane, "Seleccione un registro de la tabla");    
-    }else {
-     int id=Integer.parseInt((String) this.jTableproducto.getValueAt (fila, 0).toString());
-     DAOProductos dao=new DAOProductos();
-     dao.Eliminar (id);
-     obtenerDatos ();
-         }
+        int fila = this.jTableproducto.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(rootPane, "Seleccione un registro de la tabla");
+        } else {
+            int id = Integer.parseInt((String) this.jTableproducto.getValueAt(fila, 0).toString());
+            DAOProductos dao = new DAOProductos();
+            dao.Eliminar(id);
+            obtenerDatos();
+        }
     }//GEN-LAST:event_jButtonBorrarActionPerformed
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
-        
+
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

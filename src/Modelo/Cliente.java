@@ -1,9 +1,9 @@
-
 package Modelo;
+
 import java.sql.Date;
 
 public class Cliente {
-    
+
     private int id_cliente;
     private String nombre;
     private String apellido;
@@ -53,5 +53,5 @@ public class Cliente {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    
+
 }

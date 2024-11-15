@@ -1,16 +1,15 @@
 package Modelo;
+
 import java.sql.Date;
 
-
-
 public class Ventas {
-    
+
     private int id_venta;
     private int id_cliente;
     private int id_empleado;
     private String metodopagoV;
     private java.sql.Date fecha_venta;
- // Dos contructores y un get and setter
+    // Dos contructores y un get and setter
 
     public Ventas(int id_venta, int id_cliente, int id_empleado, String metodopagoV, Date fecha_venta) {
         this.id_venta = id_venta;
@@ -66,5 +65,5 @@ public class Ventas {
     public void setFecha_venta(Date fecha_venta) {
         this.fecha_venta = fecha_venta;
     }
-   
+
 }

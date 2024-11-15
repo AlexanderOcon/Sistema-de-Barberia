@@ -1,36 +1,32 @@
 package Controlador;
-import  Vista.*;
+
+import Vista.*;
 
 public class Sistema_Barberia extends javax.swing.JFrame {
 
-        private NewJInternalProductos Producto;
-         private NewJInternalEmpleados Empleados;
-        private JInternalFrameCliente Clientes;
-         private JInternalFrameVentas Ventas;
-            
+    private NewJInternalProductos Producto;
+    private NewJInternalEmpleados Empleados;
+    private JInternalFrameCliente Clientes;
+    private JInternalFrameVentas Ventas;
+
     public Sistema_Barberia() {
         initComponents();
         setTitle("KING OF KING");
-        
-        
-        Producto=new NewJInternalProductos();
-         desktopPane.add( Producto);
-         
-          Empleados=new NewJInternalEmpleados();
-         desktopPane.add( Empleados);
-         
-          Clientes=new JInternalFrameCliente();
-         desktopPane.add( Clientes);    
-         
-           Ventas=new JInternalFrameVentas();
-         desktopPane.add( Ventas);  
+        this.setExtendedState(Sistema_Barberia.MAXIMIZED_BOTH);
+
+        Producto = new NewJInternalProductos();
+        desktopPane.add(Producto);
+
+        Empleados = new NewJInternalEmpleados();
+        desktopPane.add(Empleados);
+
+        Clientes = new JInternalFrameCliente();
+        desktopPane.add(Clientes);
+
+        Ventas = new JInternalFrameVentas();
+        desktopPane.add(Ventas);
     }
 
-    
-    
- 
-
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -123,37 +119,27 @@ public class Sistema_Barberia extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void VerProductosMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerProductosMenuItemActionPerformed
-         Producto.obtenerDatos();
-          Producto.setVisible(true);
-          
+        Producto.obtenerDatos();
+        Producto.setVisible(true);
+
     }//GEN-LAST:event_VerProductosMenuItemActionPerformed
 
     private void VerEmpleadosMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerEmpleadosMenuItemActionPerformed
-      Empleados.obtenerDatos();
-           Empleados.setVisible(true);
+        Empleados.obtenerDatos();
+        Empleados.setVisible(true);
     }//GEN-LAST:event_VerEmpleadosMenuItemActionPerformed
 
     private void jMenuVerClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuVerClientesActionPerformed
         Clientes.obtenerDatos();
-           Clientes.setVisible(true);
+        Clientes.setVisible(true);
     }//GEN-LAST:event_jMenuVerClientesActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-      Ventas.obtenerDatos();
-           Ventas.setVisible(true);
-        
+        Ventas.obtenerDatos();
+        Ventas.setVisible(true);
+
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

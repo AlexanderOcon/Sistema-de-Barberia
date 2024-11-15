@@ -1,14 +1,14 @@
 package Modelo;
 
-
 public class Empleados {
-    
-   private int idEmpleado;
-     private String nombre;
-       private String telefono;
-        private String email;
-         private String direccion;  
-  // dos constructores y get and set
+
+    private int idEmpleado;
+    private String nombre;
+    private String telefono;
+    private String email;
+    private String direccion;
+    // dos constructores y get and set
+
     public Empleados(int idEmpleado, String nombre, String telefono, String email, String direccion) {
         this.idEmpleado = idEmpleado;
         this.nombre = nombre;
@@ -63,9 +63,5 @@ public class Empleados {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-    
-    
-         
-         
-         
+
 }
