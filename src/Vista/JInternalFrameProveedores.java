@@ -132,6 +132,11 @@ public class JInternalFrameProveedores extends javax.swing.JInternalFrame {
 
         jButtonEditar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonEditar.setText("Editar");
+        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarActionPerformed(evt);
+            }
+        });
 
         jButtonActualizar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonActualizar.setText("Actualizar");
@@ -291,7 +296,32 @@ public class JInternalFrameProveedores extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
+         // Captura datos de la cajas de texto
+        String nomb = jTextNombre.getText();
+        String apell = jTextNombre.getText();
+        String ema = jTextEmail.getText();
+        String tele = jTextTelefono.getText();
+        String url = this.jTextUrl.getText();
 
+        //Comprueba que las cajas de texto no esten vacías
+        if (nomb.contentEquals("") || apell.contentEquals("")||ema.contentEquals("")
+                || tele.contentEquals("") || url.contentEquals("")) {
+            JOptionPane.showMessageDialog(rootPane,
+                    "Todos los campos son obligatorios");
+        } else {
+            try {
+
+                //objeto para acceder al método Insertar de DAOAutor
+                Proveedores prove = new DAOProveedores().Insertar(nomb, apell, ema, tele, url);
+                JOptionPane.showMessageDialog(rootPane, "Registro agregado");
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(rootPane, "No se agregó el registro");
+            }
+        }
+        obtenerDatos();//1lama a este método para que se muestre el nuevo
+        //registro en la tabla del formulario
+        LimpiarCampos();
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
@@ -311,6 +341,34 @@ public class JInternalFrameProveedores extends javax.swing.JInternalFrame {
             obtenerDatos();
         }
     }//GEN-LAST:event_jButtonBorrarActionPerformed
+
+    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
+         int fila = this.jTableProveedores.getSelectedRow();//Se obtiene la fila seleccionada
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(rootPane, "Seleccione un registro de la tabla");
+        } else { //Se toma cada campo de la tabla del registro seleccionado
+            // y se asgina a una variable
+            try {
+                // Captura los datos del producto seleccionado
+                int id = Integer.parseInt((String) this.jTableProveedores.getValueAt(fila, 0).toString());
+                String nomb = (String) this.jTableProveedores.getValueAt(fila, 1);
+                String apell = (String) this.jTableProveedores.getValueAt(fila, 2);
+                String ema = (String) this.jTableProveedores.getValueAt(fila, 3);
+                String tele = (String) this.jTableProveedores.getValueAt(fila, 4);
+                String url = (String) this.jTableProveedores.getValueAt(fila, 5);
+                // Muestra los datos en los campos de texto para su edición
+                jTextId_Proveedor.setText("" + id);
+                jTextNombre.setText(nomb);
+                jTextApellido.setText(apell);
+                jTextEmail.setText(ema);
+                jTextTelefono.setText(tele);
+                jTextUrl.setText(url);
+                
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_jButtonEditarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

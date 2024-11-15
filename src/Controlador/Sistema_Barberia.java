@@ -8,6 +8,7 @@ public class Sistema_Barberia extends javax.swing.JFrame {
     private NewJInternalEmpleados Empleados;
     private JInternalFrameCliente Clientes;
     private JInternalFrameVentas Ventas;
+    private JInternalFrameProveedores Proveedores;
 
     public Sistema_Barberia() {
         initComponents();
@@ -25,6 +26,10 @@ public class Sistema_Barberia extends javax.swing.JFrame {
 
         Ventas = new JInternalFrameVentas();
         desktopPane.add(Ventas);
+
+        Proveedores = new JInternalFrameProveedores();
+        desktopPane.add(Proveedores);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -42,6 +47,8 @@ public class Sistema_Barberia extends javax.swing.JFrame {
         jMenuVerClientes = new javax.swing.JMenuItem();
         jMenuVentas = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(java.awt.SystemColor.activeCaptionBorder);
@@ -102,6 +109,18 @@ public class Sistema_Barberia extends javax.swing.JFrame {
 
         menuBar.add(jMenuVentas);
 
+        jMenu2.setText("Proveedores");
+
+        jMenuItem1.setText("Ver proveedor");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem1);
+
+        menuBar.add(jMenu2);
+
         setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -139,6 +158,11 @@ public class Sistema_Barberia extends javax.swing.JFrame {
         Ventas.setVisible(true);
 
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        Proveedores.obtenerDatos();
+        Proveedores.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -179,6 +203,8 @@ public class Sistema_Barberia extends javax.swing.JFrame {
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu fileMenu1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenu jMenuVentas;
     private javax.swing.JMenuItem jMenuVerClientes;
