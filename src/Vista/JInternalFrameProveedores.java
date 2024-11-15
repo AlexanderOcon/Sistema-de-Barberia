@@ -7,13 +7,12 @@ import javax.swing.JOptionPane;
 
 public class JInternalFrameProveedores extends javax.swing.JInternalFrame {
 
-
     public JInternalFrameProveedores() {
         initComponents();
         jTextId_Proveedor.setEnabled(false);
     }
-    
-    public void LimpiarCampos(){
+
+    public void LimpiarCampos() {
         jTextId_Proveedor.setText("");
         jTextNombre.setText("");
         jTextApellido.setText("");
@@ -21,8 +20,8 @@ public class JInternalFrameProveedores extends javax.swing.JInternalFrame {
         jTextTelefono.setText("");
         jTextUrl.setText("");
     }
-    
-        public void obtenerDatos() {
+
+    public void obtenerDatos() {
         try {
 
             // Se obtiene una lista de productos de la base de datos
@@ -30,7 +29,7 @@ public class JInternalFrameProveedores extends javax.swing.JInternalFrame {
             DefaultTableModel modelo = new DefaultTableModel();
 
             // Se definen las columnas de la tabla
-            String[] columnas = {"id_proveedor", "Nombre", "Apellido", "Email","Telefono","Url"};
+            String[] columnas = {"id_proveedor", "Nombre", "Apellido", "Email", "Telefono", "Url"};
             modelo.setColumnIdentifiers(columnas);
 
             // Se llena la tabla con los datos de cada producto
@@ -55,10 +54,9 @@ public class JInternalFrameProveedores extends javax.swing.JInternalFrame {
 
     }
 
-        
-        // Método para actualizar la información de un producto
+    // Método para actualizar la información de un proveedores
     public void actualizarProveedor() {
-        int id = Integer.parseInt(this. jTextId_Proveedor.getText());
+        int id = Integer.parseInt(this.jTextId_Proveedor.getText());
         String nomb = this.jTextNombre.getText();
         String apell = this.jTextApellido.getText();
         String email = this.jTextEmail.getText();
@@ -126,15 +124,30 @@ public class JInternalFrameProveedores extends javax.swing.JInternalFrame {
 
         jButtonAgregar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonAgregar.setText("Agregar");
+        jButtonAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAgregarActionPerformed(evt);
+            }
+        });
 
         jButtonEditar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonEditar.setText("Editar");
 
         jButtonActualizar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonActualizar.setText("Actualizar");
+        jButtonActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonActualizarActionPerformed(evt);
+            }
+        });
 
         jButtonBorrar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonBorrar.setText("Borrar");
+        jButtonBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBorrarActionPerformed(evt);
+            }
+        });
 
         jButtonLimpiar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonLimpiar.setText("Limpiar");
@@ -276,6 +289,28 @@ public class JInternalFrameProveedores extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
+
+    }//GEN-LAST:event_jButtonAgregarActionPerformed
+
+    private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
+        actualizarProveedor();
+        obtenerDatos();
+        LimpiarCampos();
+    }//GEN-LAST:event_jButtonActualizarActionPerformed
+
+    private void jButtonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarActionPerformed
+           int fila = this.jTableProveedores.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(rootPane, "Seleccione un registro de la tabla");
+        } else {
+            int id = Integer.parseInt((String) this.jTableProveedores.getValueAt(fila, 0).toString());
+            DAOProveedores dao = new DAOProveedores();
+            dao.Eliminar(id);
+            obtenerDatos();
+        }
+    }//GEN-LAST:event_jButtonBorrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
