@@ -52,12 +52,39 @@ public class DAOCliente {
         }
         return cliente;
     }
-// Metodo para eliminar un registro de la tabla de BD
 
+    // Metodo para eliminar un registro de la tabla de BD
     public int Eliminar(int id_cliente) {
 
         String transaccion = "DELETE FROM Empleados WHERE id_empleado = " + id_cliente;
         return new DataBase().Actualizar(transaccion);
     }
 
+    // Método para buscar clientes por nombre o apellido
+        public List<Cliente> BuscarCliente(String terminoBusqueda) {
+        // Se define la consulta SQL para buscar coincidencias en las columnas "nombre" o "apellido"
+        String transaccion = "SELECT * FROM Cliente WHERE nombre LIKE '%"
+                + terminoBusqueda + "%' OR apellido LIKE '%" + terminoBusqueda + "%'";
+
+        // Ejecuta la consulta y obtiene los resultados como una lista de mapas
+        List<Map> registros = new DataBase().Listar(transaccion);
+        // Inicializa una lista vacía para almacenar los objetos Cliente
+        List<Cliente> clientes = new ArrayList<>();
+
+        // Itera sobre los registros obtenidos de la consulta
+        for (Map registro : registros) {
+            // Crea un nuevo objeto Cliente a partir de los datos del registro actual
+            Cliente clie = new Cliente(
+                    (int) registro.get("id_cliente"), // Convierte el ID del cliente a entero
+                    (String) registro.get("nombre"), // Obtiene el nombre del cliente
+                    (String) registro.get("apellido"), // Obtiene el apellido del cliente
+                    (String) registro.get("telefono") // Obtiene el teléfono del cliente
+            );
+            // Añade el objeto Cliente a la lista
+            clientes.add(clie);
+        }
+
+        // Devuelve la lista de clientes encontrados
+        return clientes;
+    }
 }

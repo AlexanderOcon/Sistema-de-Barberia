@@ -18,6 +18,7 @@ public class JInternalFrameCliente extends javax.swing.JInternalFrame {
         jTextFieldNombre.setText("");
         jTextFieldTelefono.setText("");
         jTextFieldApellidos.setText("");
+        jTextBuscarCliente.setText("");
     }
 
     public void obtenerDatos() {
@@ -263,16 +264,16 @@ public class JInternalFrameCliente extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -284,7 +285,7 @@ public class JInternalFrameCliente extends javax.swing.JInternalFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(70, 70, 70))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,7 +333,8 @@ public class JInternalFrameCliente extends javax.swing.JInternalFrame {
         int fila = this.jTableCliente.getSelectedRow();
 
         if (fila == -1) {
-            JOptionPane.showMessageDialog(rootPane, "seleccionar un registro de la tabla");
+            JOptionPane.showMessageDialog(rootPane,
+                    "seleccionar un registro de la tabla");
         } else {
             try {
                 int id = Integer.parseInt((String) this.jTableCliente.getValueAt(fila, 0).toString());
@@ -352,7 +354,50 @@ public class JInternalFrameCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
-        // TODO add your handling code here:
+        // Obtiene el texto ingresado en el campo de búsqueda
+        String terminoBusqueda = jTextBuscarCliente.getText().trim();
+
+        // Valida que el campo de búsqueda no esté vacío
+        if (terminoBusqueda.isEmpty()) {
+            // Muestra un mensaje al usuario si el campo está vacío
+            JOptionPane.showMessageDialog(rootPane, "Ingrese un término para buscar.");
+            return; // Finaliza el método si no se ha ingresado un término
+        }
+
+        try {
+            // Llama al método BuscarCliente en DAOCliente para obtener la lista de clientes que coinciden con el término de búsqueda
+            List<Cliente> clientes = new DAOCliente().BuscarCliente(terminoBusqueda);
+
+            // Valida si hay resultados en la lista de clientes
+            if (clientes.isEmpty()) {
+                // Informa al usuario que no se encontraron clientes con el término de búsqueda
+                JOptionPane.showMessageDialog(rootPane, "No se encontraron clientes con el término: " + terminoBusqueda);
+                return; // Finaliza el método si no se encuentran coincidencias
+            }
+
+            // Crea un modelo para la tabla con las columnas especificadas
+            DefaultTableModel modelo = new DefaultTableModel();
+            String[] columnas = {"id_cliente", "nombre", "apellido", "telefono"};
+            modelo.setColumnIdentifiers(columnas); // Configura los nombres de las columnas en el modelo
+
+            // Itera sobre los clientes encontrados y los agrega como filas al modelo
+            for (Cliente clie : clientes) {
+                String[] renglon = {
+                    Integer.toString(clie.getId_cliente()), // Convierte el ID del cliente a String
+                    clie.getNombre(), // Obtiene el nombre del cliente
+                    clie.getApellido(), // Obtiene el apellido del cliente
+                    clie.getTelefono() // Obtiene el teléfono del cliente
+                };
+                modelo.addRow(renglon); // Agrega la fila al modelo
+            }
+
+            // Actualiza la tabla con el modelo que contiene los datos de los clientes encontrados
+            jTableCliente.setModel(modelo);
+
+        } catch (Exception e) {
+            e.printStackTrace(); // Muestra detalles del error en la consola
+            JOptionPane.showMessageDialog(rootPane, "Ocurrió un error al realizar la búsqueda."); // Notifica al usuario sobre el error
+        }
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
