@@ -59,4 +59,34 @@ public class DAOEmpleados {
         String transaccion = "DELETE FROM Empleados WHERE id_empleado = " + idEmpleado;
         return new DataBase().Actualizar(transaccion);
     }
+
+    public List<Empleados> BuscarEmpleado(String nombre) {
+        // Construir la consulta SQL para buscar empleados cuyo nombre contenga el texto proporcionado
+        // La cláusula LIKE se utiliza con los comodines '%' para realizar una búsqueda parcial
+        String transaccion = "SELECT * FROM Empleados WHERE nombre LIKE '%" + nombre + "%'";
+
+        // Ejecutar la consulta en la base de datos y obtener una lista de registros en forma de Map
+        List<Map> registros = new DataBase().Listar(transaccion);
+
+        // Crear una lista vacía para almacenar los objetos Empleados resultantes
+        List<Empleados> empleados = new ArrayList<>();
+
+        // Recorrer los registros obtenidos y convertirlos en objetos de la clase Empleados
+        for (Map registro : registros) {
+            // Crear un objeto Empleados usando los valores obtenidos del registro
+            Empleados emp = new Empleados(
+                    (int) registro.get("id_empleado"), // ID del empleado
+                    (String) registro.get("nombre"), // Nombre del empleado
+                    (String) registro.get("telefono"), // Teléfono del empleado
+                    (String) registro.get("email"), // Email del empleado
+                    (String) registro.get("direccion") // Dirección del empleado
+            );
+            // Agregar el objeto Empleados a la lista
+            empleados.add(emp);
+        }
+
+        // Devolver la lista de empleados encontrados
+        return empleados;
+    }
+
 }

@@ -81,5 +81,5 @@ public class DAOProductos {
         }
         return productos; // Retorna la lista de productos encontrados
     }
-
+   
 }

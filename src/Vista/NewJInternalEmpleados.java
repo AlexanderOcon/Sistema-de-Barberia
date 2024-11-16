@@ -76,6 +76,9 @@ public class NewJInternalEmpleados extends javax.swing.JInternalFrame {
         jBEditar = new javax.swing.JButton();
         jBEditar1 = new javax.swing.JButton();
         jBBorrar = new javax.swing.JButton();
+        jBLimpiar = new javax.swing.JButton();
+        jBBuscar = new javax.swing.JButton();
+        jTextBuscarEmpleado = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableEmpleados = new javax.swing.JTable();
@@ -158,6 +161,24 @@ public class NewJInternalEmpleados extends javax.swing.JInternalFrame {
             }
         });
 
+        jBLimpiar.setBackground(java.awt.SystemColor.activeCaption);
+        jBLimpiar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jBLimpiar.setText("Limpiar");
+        jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBLimpiarActionPerformed(evt);
+            }
+        });
+
+        jBBuscar.setBackground(java.awt.SystemColor.activeCaption);
+        jBBuscar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jBBuscar.setText("Buscar");
+        jBBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -180,15 +201,23 @@ public class NewJInternalEmpleados extends javax.swing.JInternalFrame {
                             .addComponent(jTextEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jBAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jBBorrar, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                            .addComponent(jBEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(jBEditar1)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jBLimpiar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBBuscar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextBuscarEmpleado))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jBAgregar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBEditar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBEditar1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,10 +249,14 @@ public class NewJInternalEmpleados extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBEditar)
                     .addComponent(jBEditar1)
-                    .addComponent(jBAgregar))
-                .addGap(27, 27, 27)
-                .addComponent(jBBorrar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jBAgregar)
+                    .addComponent(jBBorrar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBLimpiar)
+                    .addComponent(jBBuscar)
+                    .addComponent(jTextBuscarEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
@@ -249,15 +282,15 @@ public class NewJInternalEmpleados extends javax.swing.JInternalFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(302, 302, 302))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(230, 230, 230))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -266,20 +299,18 @@ public class NewJInternalEmpleados extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -374,12 +405,63 @@ public class NewJInternalEmpleados extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBBorrarActionPerformed
 
+    private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
+        LimpiarCampos();
+    }//GEN-LAST:event_jBLimpiarActionPerformed
+
+    private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
+                                         
+    String criterio = jTextBuscarEmpleado.getText().trim();
+    
+    if (criterio.isEmpty()) {
+        JOptionPane.showMessageDialog(rootPane, "Ingrese un criterio de búsqueda");
+        return;
+    }
+    
+    try {
+        // Llamar al método de DAOEmpleados para buscar
+        DAOEmpleados dao = new DAOEmpleados();
+        List<Empleados> resultado = new  DAOEmpleados().BuscarEmpleado(criterio); // Método que deberías definir en DAOEmpleados
+        
+        if (resultado.isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "No se encontraron resultados");
+            return;
+        }
+        
+        // Crear modelo de tabla para mostrar los resultados
+        DefaultTableModel modelo = new DefaultTableModel();
+        String[] columnas = {"idEmpleado", "nombre", "telefono", "email", "direccion"};
+        modelo.setColumnIdentifiers(columnas);
+        
+        for (Empleados emp : resultado) {
+            String[] fila = {
+                Integer.toString(emp.getIdEmpleado()),
+                emp.getNombre(),
+                emp.getTelefono(),
+                emp.getEmail(),
+                emp.getDireccion()
+            };
+            modelo.addRow(fila);
+        }
+        
+        jTableEmpleados.setModel(modelo);
+        
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(rootPane, "Error al buscar empleados: " + e.getMessage());
+    }
+
+
+    }//GEN-LAST:event_jBBuscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAgregar;
     private javax.swing.JButton jBBorrar;
+    private javax.swing.JButton jBBuscar;
     private javax.swing.JButton jBEditar;
     private javax.swing.JButton jBEditar1;
+    private javax.swing.JButton jBLimpiar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -389,6 +471,7 @@ public class NewJInternalEmpleados extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableEmpleados;
+    private javax.swing.JTextField jTextBuscarEmpleado;
     private javax.swing.JTextField jTextDireccion;
     private javax.swing.JTextField jTextEmail;
     private javax.swing.JTextField jTextNombre;
