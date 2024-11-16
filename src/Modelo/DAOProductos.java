@@ -59,4 +59,27 @@ public class DAOProductos {
         String transaccion = "DELETE FROM Productos WHERE id_producto = " + id_producto;
         return new DataBase().Actualizar(transaccion); // Ejecuta la consulta de eliminación
     }
+
+    // Método para buscar productos por nombre
+    public List<Productos> BuscarProducto(String nombre) {
+        // Consulta SQL para buscar productos cuyo nombre contenga la cadena proporcionada
+        String transaccion = "SELECT * FROM Productos WHERE nombre LIKE '%" + nombre + "%'";
+
+        // Lista de registros obtenidos de la base de datos
+        List<Map<String, Object>> registros = new DataBase().Listar(transaccion);
+        List<Productos> productos = new ArrayList<>();
+
+        // Recorre cada registro y lo convierte en un objeto Productos
+        for (Map<String, Object> registro : registros) {
+            Productos pro = new Productos(
+                    (int) registro.get("id_producto"), // Obtiene el ID del producto
+                    (String) registro.get("nombre"), // Obtiene el nombre
+                    (String) registro.get("descripcion"), // Obtiene la descripción
+                    (float) registro.get("precio") // Obtiene el precio
+            );
+            productos.add(pro); // Agrega el producto a la lista
+        }
+        return productos; // Retorna la lista de productos encontrados
+    }
+
 }

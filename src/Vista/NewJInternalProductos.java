@@ -19,6 +19,7 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
         jTextnombre.setText("");
         jTextdescripcion.setText("");
         jTextprecio.setText("");
+        jTextProductoBuscar.setText("");
     }
 
     // Método para obtener y mostrar todos los productos en la tabla
@@ -46,11 +47,11 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
             jTableproducto.setModel(modelo); // Se actualiza la tabla en la interfaz
 
         } catch (Exception e) {
-
+            
             e.printStackTrace();
             JOptionPane.showMessageDialog(rootPane, "Error al obtener los datos de productos.");
         }
-
+        
     }
 
 // Método para actualizar la información de un producto
@@ -70,7 +71,7 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(rootPane, "¡Ocurrió un ERROR!");
         }
-
+        
     }
 
     /**
@@ -97,6 +98,7 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
         jButtonBorrar = new javax.swing.JButton();
         jButtonBuscar = new javax.swing.JButton();
         jTextProductoBuscar = new javax.swing.JTextField();
+        jButtonLimpiar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableproducto = new javax.swing.JTable();
@@ -155,6 +157,14 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
             }
         });
 
+        jButtonLimpiar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButtonLimpiar.setText("Limpiar");
+        jButtonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimpiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -181,20 +191,22 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 15, Short.MAX_VALUE)
-                        .addComponent(jButtonAgregar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonEditar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonActualizar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonBorrar)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButtonLimpiar)
+                                .addGap(38, 38, 38)
+                                .addComponent(jButtonBuscar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextProductoBuscar))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButtonAgregar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonEditar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonActualizar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonBorrar)))
                         .addGap(38, 38, 38))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(jButtonBuscar)
-                .addGap(28, 28, 28)
-                .addComponent(jTextProductoBuscar)
-                .addGap(110, 110, 110))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,8 +236,9 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonBuscar)
-                    .addComponent(jTextProductoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jTextProductoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonLimpiar))
+                .addContainerGap(210, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Productos registrados", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -315,7 +328,7 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
                 jTextnombre.setText(nomb);
                 jTextdescripcion.setText(desc);
                 jTextprecio.setText(prec);
-
+                
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
@@ -343,8 +356,54 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonBorrarActionPerformed
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
+        // Obtiene el texto ingresado en el campo de búsqueda
+        String terminoBusqueda = jTextProductoBuscar.getText().trim();
+
+        // Valida que el campo de búsqueda no esté vacío
+        if (terminoBusqueda.isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Ingrese un término para buscar."); // Muestra un mensaje al usuario si el campo está vacío
+            return; // Finaliza el método
+        }
+        
+        try {
+            // Llama al método BuscarProducto en DAOProductos para obtener la lista de productos que coinciden con el término de búsqueda
+            List<Productos> productos = new DAOProductos().BuscarProducto(terminoBusqueda);
+
+            // Valida si hay resultados en la lista de productos
+            if (productos.isEmpty()) {
+                JOptionPane.showMessageDialog(rootPane, "No se encontraron productos con el término: " + terminoBusqueda); // Informa al usuario que no hubo coincidencias
+                return; // Finaliza el método
+            }
+
+            // Crea un modelo para la tabla con las columnas especificadas
+            DefaultTableModel modelo = new DefaultTableModel();
+            String[] columnas = {"id_producto", "nombre", "descripcion", "precio"};
+            modelo.setColumnIdentifiers(columnas); // Configura los nombres de las columnas en el modelo
+
+            // Itera sobre los productos encontrados y los agrega como filas al modelo
+            for (Productos pro : productos) {
+                String[] renglon = {
+                    Integer.toString(pro.getId_producto()), // Convierte el ID del producto a String
+                    pro.getNombre(), // Obtiene el nombre del producto
+                    pro.getDescripcion(), // Obtiene la descripción del producto
+                    pro.getPrecio().toString() // Convierte el precio del producto a String
+                };
+                modelo.addRow(renglon); // Agrega la fila al modelo
+            }
+
+            // Actualiza la tabla con el modelo que contiene los datos de los productos encontrados
+            jTableproducto.setModel(modelo);
+            
+        } catch (Exception e) {
+            e.printStackTrace(); // Muestra detalles del error en la consola
+            JOptionPane.showMessageDialog(rootPane, "Ocurrió un error al realizar la búsqueda."); // Notifica al usuario sobre el error
+        }
 
     }//GEN-LAST:event_jButtonBuscarActionPerformed
+
+    private void jButtonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimpiarActionPerformed
+        LimpiarCampos();
+    }//GEN-LAST:event_jButtonLimpiarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonActualizar;
@@ -352,6 +411,7 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButtonBorrar;
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonEditar;
+    private javax.swing.JButton jButtonLimpiar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
