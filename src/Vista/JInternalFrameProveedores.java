@@ -32,7 +32,7 @@ public class JInternalFrameProveedores extends javax.swing.JInternalFrame {
             String[] columnas = {"id_proveedor", "Nombre", "Apellido", "Email", "Telefono", "Url"};
             modelo.setColumnIdentifiers(columnas);
 
-            // Se llena la tabla con los datos de cada producto
+            // Se llena la tabla con los datos de cada proveedor
             for (Proveedores prove : proveedores) {
                 String[] renglon = {
                     Integer.toString(prove.getId_proveedor()),
@@ -49,7 +49,7 @@ public class JInternalFrameProveedores extends javax.swing.JInternalFrame {
         } catch (Exception e) {
 
             e.printStackTrace();
-            JOptionPane.showMessageDialog(rootPane, "Error al obtener los datos de productos.");
+            JOptionPane.showMessageDialog(rootPane, "Error al obtener los datos de proveedor.");
         }
 
     }
@@ -304,7 +304,7 @@ public class JInternalFrameProveedores extends javax.swing.JInternalFrame {
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
          // Captura datos de la cajas de texto
         String nomb = jTextNombre.getText();
-        String apell = jTextNombre.getText();
+        String apell = jTextApellido.getText();
         String ema = jTextEmail.getText();
         String tele = jTextTelefono.getText();
         String url = this.jTextUrl.getText();
@@ -317,7 +317,7 @@ public class JInternalFrameProveedores extends javax.swing.JInternalFrame {
         } else {
             try {
 
-                //objeto para acceder al método Insertar de DAOAutor
+                //objeto para acceder al método Insertar de DAOProveedores
                 Proveedores prove = new DAOProveedores().Insertar(nomb, apell, ema, tele, url);
                 JOptionPane.showMessageDialog(rootPane, "Registro agregado");
             } catch (Exception e) {
