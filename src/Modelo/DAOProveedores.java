@@ -7,30 +7,30 @@ public class DAOProveedores {
     
     public Proveedores Insertar(String Nombre, String Apellido, String Email, String Telefono,String Url) {
         // Construcción de la transacción SQL para insertar una nueva venta en la tabla Ventas
-        String transaccion = "INSERT INTO Proveedores (Nombre, Apellido, Email, Telefono,Url) VALUES ("
-                + Nombre + ", "
-                + Apellido + ", '"
+        String transaccion = "INSERT INTO Proveedores (Nombre, Apellido, Email, Telefono, Url) VALUES ('"
+                + Nombre + "','"
+                + Apellido + "','"
                 + Email + "', '"
-                + Telefono + "')"
+                + Telefono + "','"
                  + Url + "')";
         
         // Usamos el método Actualizar para ejecutar la transacción en la base de datos
         if (new DataBase().Actualizar(transaccion) > 0) {
             // Si la transacción fue exitosa, devolvemos un objeto Ventas con los datos insertados
-            return new Proveedores (Nombre, Apellido, Email, Telefono,Url);
+            return new Proveedores (Nombre, Apellido, Email, Telefono, Url);
         }
         return null; // Si hubo un error, devolvemos null
-  } 
+    } 
     
      // Método para actualizar los datos de un producto existente en la base de datos
     public int Actualizar(int id_proveedor, String Nombre, String Apellido, String Email, String Telefono, String Url) {
          // Consulta SQL para actualizar el nombre, descripción y precio del producto con id específico
         String transaccion = "UPDATE Proveedores SET Nombre='"
                 + Nombre + "', Apellido='"
-                + Apellido + "', Email="
-                + Email + "',=Telefono"
-                + Telefono +"',=Url"
-                + Url + "WHERE id_proveedor="
+                + Apellido + "', Email='"
+                + Email + "',=Telefono'"
+                + Telefono +"',=Url'"
+                + Url + "'WHERE id_proveedor="
                 + id_proveedor;
         
         // Ejecuta la consulta de actualización 

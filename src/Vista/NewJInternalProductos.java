@@ -96,12 +96,14 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
         jButtonEditar = new javax.swing.JButton();
         jButtonActualizar = new javax.swing.JButton();
         jButtonBorrar = new javax.swing.JButton();
-        jButtonBuscar = new javax.swing.JButton();
-        jTextProductoBuscar = new javax.swing.JTextField();
         jButtonLimpiar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableproducto = new javax.swing.JTable();
+        jTextProductoBuscar = new javax.swing.JTextField();
+        jButtonBuscar = new javax.swing.JButton();
+
+        setClosable(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registar Producto", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
@@ -149,14 +151,6 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
             }
         });
 
-        jButtonBuscar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButtonBuscar.setText("Buscar");
-        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonBuscarActionPerformed(evt);
-            }
-        });
-
         jButtonLimpiar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonLimpiar.setText("Limpiar");
         jButtonLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -191,22 +185,19 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 15, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButtonLimpiar)
-                                .addGap(38, 38, 38)
-                                .addComponent(jButtonBuscar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextProductoBuscar))
+                                .addGap(49, 49, 49)
+                                .addComponent(jButtonLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(54, 54, 54)
+                                .addComponent(jButtonBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButtonAgregar)
+                                .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39)
+                                .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButtonEditar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonActualizar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonBorrar)))
-                        .addGap(38, 38, 38))))
+                                .addComponent(jButtonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(27, 27, 27))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,14 +222,12 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAgregar)
                     .addComponent(jButtonEditar)
-                    .addComponent(jButtonActualizar)
-                    .addComponent(jButtonBorrar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jButtonActualizar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonBuscar)
-                    .addComponent(jTextProductoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonLimpiar))
-                .addContainerGap(210, Short.MAX_VALUE))
+                    .addComponent(jButtonLimpiar)
+                    .addComponent(jButtonBorrar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Productos registrados", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -256,17 +245,35 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTableproducto);
 
+        jButtonBuscar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButtonBuscar.setText("Buscar");
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTextProductoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonBuscar)
+                .addGap(22, 22, 22))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonBuscar)
+                    .addComponent(jTextProductoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

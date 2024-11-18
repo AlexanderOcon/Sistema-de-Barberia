@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+  <Properties>
+    <Property name="closable" type="boolean" value="true"/>
+  </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
@@ -76,25 +79,22 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="15" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="jButtonLimpiar" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                                  <Component id="jButtonBuscar" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jTextProductoBuscar" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                                  <Component id="jButtonLimpiar" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                                  <Component id="jButtonBorrar" min="-2" pref="114" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <Component id="jButtonAgregar" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButtonAgregar" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                                  <Component id="jButtonEditar" min="-2" pref="115" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jButtonEditar" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jButtonActualizar" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jButtonBorrar" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButtonActualizar" min="-2" pref="114" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -128,15 +128,13 @@
                       <Component id="jButtonAgregar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonEditar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonActualizar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jButtonLimpiar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonBorrar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButtonBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextProductoBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButtonLimpiar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="210" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -226,19 +224,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonBorrarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButtonBuscar">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="14" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Buscar"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonBuscarActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jTextProductoBuscar">
-        </Component>
         <Component class="javax.swing.JButton" name="jButtonLimpiar">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -267,13 +252,25 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="jScrollPane1" alignment="0" pref="439" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jTextProductoBuscar" min="-2" pref="302" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="jButtonBuscar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="515" max="32767" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jButtonBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextProductoBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" pref="465" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -300,6 +297,19 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JTextField" name="jTextProductoBuscar">
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonBuscar">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Buscar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonBuscarActionPerformed"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>
