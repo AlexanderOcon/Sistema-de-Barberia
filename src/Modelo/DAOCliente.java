@@ -56,7 +56,7 @@ public class DAOCliente {
     // Metodo para eliminar un registro de la tabla de BD
     public int Eliminar(int id_cliente) {
 
-        String transaccion = "DELETE FROM Empleados WHERE id_empleado = " + id_cliente;
+        String transaccion = "DELETE FROM Cliente WHERE id_cliente = " + id_cliente;
         return new DataBase().Actualizar(transaccion);
     }
 

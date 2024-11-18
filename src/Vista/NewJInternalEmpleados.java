@@ -6,18 +6,19 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 
 public class NewJInternalEmpleados extends javax.swing.JInternalFrame {
-
+    
     public NewJInternalEmpleados() {
         initComponents();
         jTextidEmpleado.setEnabled(false);//deshabilitar campo de idEmpleado
     }
-
+    
     public void LimpiarCampos() {
         jTextidEmpleado.setText("");
         jTextNombre.setText("");
         jTextTelefono.setText("");
         jTextEmail.setText("");
         jTextDireccion.setText("");
+        jTextBuscarEmpleado.setText("");
     }
 
     //Método para listar datos dentro de la tabla
@@ -40,14 +41,14 @@ public class NewJInternalEmpleados extends javax.swing.JInternalFrame {
         jTableEmpleados.setModel(modelo);
         // Ubica los datos del modelo en la tabla
     }
-
+    
     public void actualizar() {
         int id = Integer.parseInt(this.jTextidEmpleado.getText());
         String nom = this.jTextNombre.getText();
         String ape = this.jTextTelefono.getText();
         String corr = this.jTextEmail.getText();
         String dire = this.jTextDireccion.getText();
-
+        
         DAOEmpleados dao = new DAOEmpleados();
         int res = dao.Actualizar(id, nom, ape, corr, dire);
         if (res == 1) {
@@ -56,7 +57,7 @@ public class NewJInternalEmpleados extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(rootPane, "¡Ocurrió un ERROR!");
         }
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -377,7 +378,7 @@ public class NewJInternalEmpleados extends javax.swing.JInternalFrame {
                 jTextTelefono.setText(tele);
                 jTextEmail.setText(ema);
                 jTextDireccion.setText(dire);
-
+                
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
@@ -391,7 +392,7 @@ public class NewJInternalEmpleados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBEditar1ActionPerformed
 
     private void jBBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBorrarActionPerformed
-
+        
         int fila = this.jTableEmpleados.getSelectedRow();
         if (fila == -1) {
             JOptionPane.showMessageDialog(rootPane, "Seleccione un registro de la tabla");
@@ -408,47 +409,47 @@ public class NewJInternalEmpleados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
-                                         
-    String criterio = jTextBuscarEmpleado.getText().trim();
-    
-    if (criterio.isEmpty()) {
-        JOptionPane.showMessageDialog(rootPane, "Ingrese un criterio de búsqueda");
-        return;
-    }
-    
-    try {
-        // Llamar al método de DAOEmpleados para buscar
-        DAOEmpleados dao = new DAOEmpleados();
-        List<Empleados> resultado = new  DAOEmpleados().BuscarEmpleado(criterio); // Método que deberías definir en DAOEmpleados
         
-        if (resultado.isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "No se encontraron resultados");
+        String criterio = jTextBuscarEmpleado.getText().trim();
+        
+        if (criterio.isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Ingrese un criterio de búsqueda");
             return;
         }
         
-        // Crear modelo de tabla para mostrar los resultados
-        DefaultTableModel modelo = new DefaultTableModel();
-        String[] columnas = {"idEmpleado", "nombre", "telefono", "email", "direccion"};
-        modelo.setColumnIdentifiers(columnas);
-        
-        for (Empleados emp : resultado) {
-            String[] fila = {
-                Integer.toString(emp.getIdEmpleado()),
-                emp.getNombre(),
-                emp.getTelefono(),
-                emp.getEmail(),
-                emp.getDireccion()
-            };
-            modelo.addRow(fila);
+        try {
+            // Llamar al método de DAOEmpleados para buscar
+            DAOEmpleados dao = new DAOEmpleados();
+            List<Empleados> resultado = new DAOEmpleados().BuscarEmpleado(criterio); // Método que deberías definir en DAOEmpleados
+            
+            if (resultado.isEmpty()) {
+                JOptionPane.showMessageDialog(rootPane, "No se encontraron resultados");
+                return;
+            }
+
+            // Crear modelo de tabla para mostrar los resultados
+            DefaultTableModel modelo = new DefaultTableModel();
+            String[] columnas = {"idEmpleado", "nombre", "telefono", "email", "direccion"};
+            modelo.setColumnIdentifiers(columnas);
+            
+            for (Empleados emp : resultado) {
+                String[] fila = {
+                    Integer.toString(emp.getIdEmpleado()),
+                    emp.getNombre(),
+                    emp.getTelefono(),
+                    emp.getEmail(),
+                    emp.getDireccion()
+                };
+                modelo.addRow(fila);
+            }
+            
+            jTableEmpleados.setModel(modelo);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(rootPane, "Error al buscar empleados: " + e.getMessage());
         }
         
-        jTableEmpleados.setModel(modelo);
-        
-    } catch (Exception e) {
-        e.printStackTrace();
-        JOptionPane.showMessageDialog(rootPane, "Error al buscar empleados: " + e.getMessage());
-    }
-
 
     }//GEN-LAST:event_jBBuscarActionPerformed
 

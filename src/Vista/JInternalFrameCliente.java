@@ -411,9 +411,8 @@ public class JInternalFrameCliente extends javax.swing.JInternalFrame {
 
     private void jButtonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarActionPerformed
 
-        // TODO add your handling code here:
         int fila = this.jTableCliente.getSelectedRow();
-        if (fila == 1) {
+        if (fila == -1) {
             JOptionPane.showMessageDialog(rootPane, "Seleccione un registro de la tabla");
         } else {
             int id = Integer.parseInt((String) this.jTableCliente.getValueAt(fila, 0).toString());
