@@ -3,8 +3,8 @@ package Controlador;
 import Vista.*;
 
 public class Sistema_Barberia extends javax.swing.JFrame {
-
-    private NewJInternalProductos Producto;
+    
+private NewJInternalProductos Producto;
     private NewJInternalEmpleados Empleados;
     private JInternalFrameCliente Clientes;
     private JInternalFrameVentas Ventas;
