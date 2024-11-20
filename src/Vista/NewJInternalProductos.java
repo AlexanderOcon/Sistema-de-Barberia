@@ -47,11 +47,11 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
             jTableproducto.setModel(modelo); // Se actualiza la tabla en la interfaz
 
         } catch (Exception e) {
-            
+
             e.printStackTrace();
             JOptionPane.showMessageDialog(rootPane, "Error al obtener los datos de productos.");
         }
-        
+
     }
 
 // Método para actualizar la información de un producto
@@ -71,7 +71,7 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(rootPane, "¡Ocurrió un ERROR!");
         }
-        
+
     }
 
     /**
@@ -389,7 +389,7 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
                 jTextnombre.setText(nomb);
                 jTextdescripcion.setText(desc);
                 jTextprecio.setText(prec);
-                
+
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
@@ -425,7 +425,7 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(rootPane, "Ingrese un término para buscar."); // Muestra un mensaje al usuario si el campo está vacío
             return; // Finaliza el método
         }
-        
+
         try {
             // Llama al método BuscarProducto en DAOProductos para obtener la lista de productos que coinciden con el término de búsqueda
             List<Productos> productos = new DAOProductos().BuscarProducto(terminoBusqueda);
@@ -454,7 +454,7 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
 
             // Actualiza la tabla con el modelo que contiene los datos de los productos encontrados
             jTableproducto.setModel(modelo);
-            
+
         } catch (Exception e) {
             e.printStackTrace(); // Muestra detalles del error en la consola
             JOptionPane.showMessageDialog(rootPane, "Ocurrió un error al realizar la búsqueda."); // Notifica al usuario sobre el error

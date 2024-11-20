@@ -10,7 +10,7 @@ public class JInternalFrameVentas extends javax.swing.JInternalFrame {
 
     public JInternalFrameVentas() {
         initComponents();
-        jTextIdBuscarVentas.setEnabled(false);//deshabilitar campo de idventa
+        jTextIdVenta1.setEnabled(false);//deshabilitar campo de idventa
     }
 
     public void LimpiarCampos() {

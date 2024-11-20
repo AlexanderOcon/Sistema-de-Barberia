@@ -346,7 +346,7 @@ public class JInternalFrameProveedores extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
-         // Captura datos de la cajas de texto
+        // Captura datos de la cajas de texto
         String nomb = jTextNombre.getText();
         String apell = jTextApellido.getText();
         String ema = jTextEmail.getText();
@@ -354,7 +354,7 @@ public class JInternalFrameProveedores extends javax.swing.JInternalFrame {
         String url = this.jTextUrl.getText();
 
         //Comprueba que las cajas de texto no esten vacías
-        if (nomb.contentEquals("") || apell.contentEquals("")||ema.contentEquals("")
+        if (nomb.contentEquals("") || apell.contentEquals("") || ema.contentEquals("")
                 || tele.contentEquals("") || url.contentEquals("")) {
             JOptionPane.showMessageDialog(rootPane,
                     "Todos los campos son obligatorios");
@@ -381,7 +381,7 @@ public class JInternalFrameProveedores extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
     private void jButtonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarActionPerformed
-           int fila = this.jTableProveedores.getSelectedRow();
+        int fila = this.jTableProveedores.getSelectedRow();
         if (fila == -1) {
             JOptionPane.showMessageDialog(rootPane, "Seleccione un registro de la tabla");
         } else {
@@ -393,7 +393,7 @@ public class JInternalFrameProveedores extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonBorrarActionPerformed
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
-         int fila = this.jTableProveedores.getSelectedRow();//Se obtiene la fila seleccionada
+        int fila = this.jTableProveedores.getSelectedRow();//Se obtiene la fila seleccionada
         if (fila == -1) {
             JOptionPane.showMessageDialog(rootPane, "Seleccione un registro de la tabla");
         } else { //Se toma cada campo de la tabla del registro seleccionado
@@ -413,7 +413,7 @@ public class JInternalFrameProveedores extends javax.swing.JInternalFrame {
                 jTextEmail.setText(ema);
                 jTextTelefono.setText(tele);
                 jTextUrl.setText(url);
-                
+
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }

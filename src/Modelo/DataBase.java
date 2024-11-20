@@ -7,7 +7,7 @@ public class DataBase {
 
     private final String URL = "jdbc:mysql://localhost:3306/Barberia";
     private final String user = "root";
-    private final String password = "123456789";
+    private final String password = "Alexander12";
 
     private Connection conexion;
 
