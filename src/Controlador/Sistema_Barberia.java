@@ -37,89 +37,90 @@ private NewJInternalProductos Producto;
     private void initComponents() {
 
         desktopPane = new javax.swing.JDesktopPane();
+        jLabel1 = new javax.swing.JLabel();
+        jButtonProductos = new javax.swing.JButton();
+        jButtonEmpleados = new javax.swing.JButton();
+        jButtonClientes = new javax.swing.JButton();
+        jButtonVentas = new javax.swing.JButton();
+        jButtonProveedores = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
-        fileMenu = new javax.swing.JMenu();
-        VerProductosMenuItem = new javax.swing.JMenuItem();
-        fileMenu1 = new javax.swing.JMenu();
-        VerEmpleadosMenuItem = new javax.swing.JMenuItem();
-        jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuVerClientes = new javax.swing.JMenuItem();
-        jMenuVentas = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(java.awt.SystemColor.activeCaptionBorder);
 
-        desktopPane.setBackground(new java.awt.Color(0, 153, 153));
+        desktopPane.setBackground(new java.awt.Color(40, 86, 115));
         desktopPane.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
 
-        fileMenu.setMnemonic('f');
-        fileMenu.setText("Productos");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("BARBERIA KING OF KING");
+        desktopPane.add(jLabel1);
+        jLabel1.setBounds(470, 40, 320, 32);
 
-        VerProductosMenuItem.setMnemonic('o');
-        VerProductosMenuItem.setText("Ver Productos");
-        VerProductosMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        jButtonProductos.setBackground(new java.awt.Color(58, 114, 142));
+        jButtonProductos.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jButtonProductos.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/hygiene-product_17205369 (1).png"))); // NOI18N
+        jButtonProductos.setText("Productos");
+        jButtonProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VerProductosMenuItemActionPerformed(evt);
+                jButtonProductosActionPerformed(evt);
             }
         });
-        fileMenu.add(VerProductosMenuItem);
+        desktopPane.add(jButtonProductos);
+        jButtonProductos.setBounds(100, 100, 220, 40);
 
-        menuBar.add(fileMenu);
-
-        fileMenu1.setMnemonic('f');
-        fileMenu1.setText("Empleados");
-
-        VerEmpleadosMenuItem.setMnemonic('o');
-        VerEmpleadosMenuItem.setText("Ver Empleados");
-        VerEmpleadosMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEmpleados.setBackground(new java.awt.Color(58, 114, 142));
+        jButtonEmpleados.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jButtonEmpleados.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonEmpleados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/user (1).png"))); // NOI18N
+        jButtonEmpleados.setText("Empleados");
+        jButtonEmpleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VerEmpleadosMenuItemActionPerformed(evt);
+                jButtonEmpleadosActionPerformed(evt);
             }
         });
-        fileMenu1.add(VerEmpleadosMenuItem);
-        fileMenu1.add(jSeparator1);
+        desktopPane.add(jButtonEmpleados);
+        jButtonEmpleados.setBounds(100, 180, 220, 40);
 
-        menuBar.add(fileMenu1);
-
-        jMenu1.setText("Clientes");
-
-        jMenuVerClientes.setText("Ver Clientes");
-        jMenuVerClientes.addActionListener(new java.awt.event.ActionListener() {
+        jButtonClientes.setBackground(new java.awt.Color(58, 114, 142));
+        jButtonClientes.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jButtonClientes.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/rating_3201521 (1).png"))); // NOI18N
+        jButtonClientes.setText("Clientes");
+        jButtonClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuVerClientesActionPerformed(evt);
+                jButtonClientesActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuVerClientes);
+        desktopPane.add(jButtonClientes);
+        jButtonClientes.setBounds(100, 270, 220, 40);
 
-        menuBar.add(jMenu1);
-
-        jMenuVentas.setText("Ventas");
-
-        jMenuItem2.setText("Ver Ventas");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonVentas.setBackground(new java.awt.Color(58, 114, 142));
+        jButtonVentas.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jButtonVentas.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/shopping-bag_743007 (2).png"))); // NOI18N
+        jButtonVentas.setText("Ventas");
+        jButtonVentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jButtonVentasActionPerformed(evt);
             }
         });
-        jMenuVentas.add(jMenuItem2);
+        desktopPane.add(jButtonVentas);
+        jButtonVentas.setBounds(100, 360, 220, 40);
 
-        menuBar.add(jMenuVentas);
-
-        jMenu2.setText("Proveedores");
-
-        jMenuItem1.setText("Ver proveedor");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonProveedores.setBackground(new java.awt.Color(58, 114, 142));
+        jButtonProveedores.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jButtonProveedores.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/packing_3519189 (1).png"))); // NOI18N
+        jButtonProveedores.setText("Proveedores");
+        jButtonProveedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jButtonProveedoresActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
-
-        menuBar.add(jMenu2);
+        desktopPane.add(jButtonProveedores);
+        jButtonProveedores.setBounds(100, 440, 220, 50);
 
         setJMenuBar(menuBar);
 
@@ -127,44 +128,51 @@ private NewJInternalProductos Producto;
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void VerProductosMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerProductosMenuItemActionPerformed
-        Producto.obtenerDatos();
-        Producto.setVisible(true);
+    private void jButtonProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProveedoresActionPerformed
+        // TODO add your handling code here:
+        Proveedores.obtenerDatos();
+        Proveedores.setVisible(true);
 
-    }//GEN-LAST:event_VerProductosMenuItemActionPerformed
+    }//GEN-LAST:event_jButtonProveedoresActionPerformed
 
-    private void VerEmpleadosMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerEmpleadosMenuItemActionPerformed
-        Empleados.obtenerDatos();
-        Empleados.setVisible(true);
-    }//GEN-LAST:event_VerEmpleadosMenuItemActionPerformed
-
-    private void jMenuVerClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuVerClientesActionPerformed
-        Clientes.obtenerDatos();
-        Clientes.setVisible(true);
-    }//GEN-LAST:event_jMenuVerClientesActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jButtonVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVentasActionPerformed
+        // TODO add your handling code here:
         Ventas.obtenerDatos();
         Ventas.setVisible(true);
 
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_jButtonVentasActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        Proveedores.obtenerDatos();
-        Proveedores.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void jButtonClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClientesActionPerformed
+        // TODO add your handling code here:
 
-    public static void main(String args[]) {
+        Clientes.obtenerDatos();
+        Clientes.setVisible(true);
+    }//GEN-LAST:event_jButtonClientesActionPerformed
+
+    private void jButtonEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEmpleadosActionPerformed
+        // TODO add your handling code here:
+        Empleados.obtenerDatos();
+        Empleados.setVisible(true);
+
+    }//GEN-LAST:event_jButtonEmpleadosActionPerformed
+
+    private void jButtonProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProductosActionPerformed
+        // TODO add your handling code here:
+        Producto.obtenerDatos();
+        Producto.setVisible(true);
+    }//GEN-LAST:event_jButtonProductosActionPerformed
+
+  public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -197,18 +205,13 @@ private NewJInternalProductos Producto;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem VerEmpleadosMenuItem;
-    private javax.swing.JMenuItem VerProductosMenuItem;
     private javax.swing.JDesktopPane desktopPane;
-    private javax.swing.JMenu fileMenu;
-    private javax.swing.JMenu fileMenu1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenu jMenuVentas;
-    private javax.swing.JMenuItem jMenuVerClientes;
-    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JButton jButtonClientes;
+    private javax.swing.JButton jButtonEmpleados;
+    private javax.swing.JButton jButtonProductos;
+    private javax.swing.JButton jButtonProveedores;
+    private javax.swing.JButton jButtonVentas;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
 
