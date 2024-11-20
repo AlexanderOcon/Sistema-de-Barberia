@@ -51,7 +51,7 @@ private NewJInternalProductos Producto;
         desktopPane.setBackground(new java.awt.Color(40, 86, 115));
         desktopPane.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Javanese Text", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("BARBERIA KING OF KING");
         desktopPane.add(jLabel1);
