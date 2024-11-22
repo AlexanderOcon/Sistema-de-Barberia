@@ -7,73 +7,73 @@ import javax.swing.JOptionPane;
 
 public class JInternalFrameProveedores extends javax.swing.JInternalFrame {
 
+    // Constructor de la clase
     public JInternalFrameProveedores() {
-        initComponents();
-        jTextId_Proveedor.setEnabled(false);
+        initComponents(); // Inicializa los componentes de la interfaz
+        jTextId_Proveedor.setEnabled(false); // Deshabilita el campo de texto para el ID del proveedor
     }
 
+    // Método para limpiar los campos de texto en la interfaz
     public void LimpiarCampos() {
-        jTextId_Proveedor.setText("");
-        jTextNombre.setText("");
-        jTextApellido.setText("");
-        jTextEmail.setText("");
-        jTextTelefono.setText("");
-        jTextUrl.setText("");
+        jTextId_Proveedor.setText(""); // Limpia el campo del ID del proveedor
+        jTextNombre.setText(""); // Limpia el campo del nombre
+        jTextApellido.setText(""); // Limpia el campo del apellido
+        jTextEmail.setText(""); // Limpia el campo del email
+        jTextTelefono.setText(""); // Limpia el campo del teléfono
+        jTextUrl.setText(""); // Limpia el campo de la URL
     }
 
+    // Método para obtener los datos de los proveedores desde la base de datos
     public void obtenerDatos() {
         try {
-
-            // Se obtiene una lista de productos de la base de datos
+            // Obtiene una lista de proveedores desde la base de datos
             List<Proveedores> proveedores = new DAOProveedores().ObtenerDatos();
             DefaultTableModel modelo = new DefaultTableModel();
 
-            // Se definen las columnas de la tabla
+            // Define las columnas de la tabla
             String[] columnas = {"id_proveedor", "Nombre", "Apellido", "Email", "Telefono", "Url"};
             modelo.setColumnIdentifiers(columnas);
 
-            // Se llena la tabla con los datos de cada proveedor
+            // Llena la tabla con los datos obtenidos
             for (Proveedores prove : proveedores) {
                 String[] renglon = {
-                    Integer.toString(prove.getId_proveedor()),
-                    prove.getNombre(),
-                    prove.getApellido(),
-                    prove.getEmail(),
-                    prove.getTelefono(),
-                    prove.getUrl()
+                    Integer.toString(prove.getId_proveedor()), // Convierte el ID del proveedor a String
+                    prove.getNombre(), // Obtiene el nombre del proveedor
+                    prove.getApellido(), // Obtiene el apellido del proveedor
+                    prove.getEmail(), // Obtiene el email del proveedor
+                    prove.getTelefono(), // Obtiene el teléfono del proveedor
+                    prove.getUrl() // Obtiene la URL del proveedor
                 };
-                modelo.addRow(renglon);
+                modelo.addRow(renglon); // Agrega una fila al modelo de la tabla
             }
-            jTableProveedores.setModel(modelo); // Se actualiza la tabla en la interfaz
+            jTableProveedores.setModel(modelo); // Actualiza la tabla en la interfaz
 
         } catch (Exception e) {
-
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(rootPane, "Error al obtener los datos de proveedor.");
+            e.printStackTrace(); // Imprime el error en la consola
+            JOptionPane.showMessageDialog(rootPane, "Error al obtener los datos de proveedor."); // Muestra un mensaje de error
         }
-
     }
 
-    // Método para actualizar la información de un proveedores
+    // Método para actualizar la información de un proveedor
     public void actualizarProveedor() {
-        int id = Integer.parseInt(this.jTextId_Proveedor.getText());
-        String nomb = this.jTextNombre.getText();
-        String apell = this.jTextApellido.getText();
-        String email = this.jTextEmail.getText();
-        String tel = this.jTextTelefono.getText();
-        String url = this.jTextUrl.getText();
+        // Obtiene los datos ingresados en la interfaz
+        int id = Integer.parseInt(this.jTextId_Proveedor.getText()); // Obtiene el ID del proveedor
+        String nomb = this.jTextNombre.getText(); // Obtiene el nombre del proveedor
+        String apell = this.jTextApellido.getText(); // Obtiene el apellido del proveedor
+        String email = this.jTextEmail.getText(); // Obtiene el email del proveedor
+        String tel = this.jTextTelefono.getText(); // Obtiene el teléfono del proveedor
+        String url = this.jTextUrl.getText(); // Obtiene la URL del proveedor
 
-        // Actualiza el producto en la base de datos
+        // Crea una instancia de DAOProveedores para realizar la actualización
         DAOProveedores dao = new DAOProveedores();
-        int res = dao.Actualizar(id, nomb, apell, email, tel, url);
+        int res = dao.Actualizar(id, nomb, apell, email, tel, url); // Llama al método para actualizar en la base de datos
 
-        // Muestra un mensaje según el resultado de la actualización
+        // Muestra un mensaje dependiendo del resultado de la operación
         if (res == 1) {
-            JOptionPane.showMessageDialog(rootPane, "Proveedor Actualizado!");
+            JOptionPane.showMessageDialog(rootPane, "Proveedor Actualizado!"); // Actualización exitosa
         } else {
-            JOptionPane.showMessageDialog(rootPane, "¡Ocurrió un ERROR!");
+            JOptionPane.showMessageDialog(rootPane, "¡Ocurrió un ERROR!"); // Error en la actualización
         }
-
     }
 
     @SuppressWarnings("unchecked")
@@ -375,49 +375,67 @@ public class JInternalFrameProveedores extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
-        actualizarProveedor();
-        obtenerDatos();
-        LimpiarCampos();
+        actualizarProveedor();// Llama al método para actualizar la información de un proveedor
+        obtenerDatos();// Llama al método para obtener los datos actualizados de los proveedores y mostrarlos en la tabla
+        LimpiarCampos(); // Llama al método para limpiar los campos de texto en la interfaz
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
     private void jButtonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarActionPerformed
+        // Obtiene la fila seleccionada en la tabla de proveedores
         int fila = this.jTableProveedores.getSelectedRow();
+
+        // Verifica si no se ha seleccionado ninguna fila
         if (fila == -1) {
+            // Muestra un mensaje al usuario indicando que debe seleccionar un registro
             JOptionPane.showMessageDialog(rootPane, "Seleccione un registro de la tabla");
         } else {
+            // Obtiene el ID del proveedor desde la tabla, convirtiéndolo a entero
             int id = Integer.parseInt((String) this.jTableProveedores.getValueAt(fila, 0).toString());
+
+            // Crea una instancia de DAOProveedores y elimina el proveedor con el ID obtenido
             DAOProveedores dao = new DAOProveedores();
             dao.Eliminar(id);
+
+            // Llama al método para actualizar los datos mostrados en la tabla
             obtenerDatos();
         }
+
     }//GEN-LAST:event_jButtonBorrarActionPerformed
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
-        int fila = this.jTableProveedores.getSelectedRow();//Se obtiene la fila seleccionada
+// Obtiene la fila seleccionada en la tabla de proveedores
+        int fila = this.jTableProveedores.getSelectedRow();
+
+// Verifica si no se ha seleccionado ninguna fila
         if (fila == -1) {
+            // Muestra un mensaje al usuario indicando que debe seleccionar un registro
             JOptionPane.showMessageDialog(rootPane, "Seleccione un registro de la tabla");
-        } else { //Se toma cada campo de la tabla del registro seleccionado
-            // y se asgina a una variable
+        } else {
+            // Si hay una fila seleccionada, se obtienen los datos de la misma
             try {
-                // Captura los datos del producto seleccionado
+                // Captura el ID del proveedor seleccionado y lo convierte a entero
                 int id = Integer.parseInt((String) this.jTableProveedores.getValueAt(fila, 0).toString());
-                String nomb = (String) this.jTableProveedores.getValueAt(fila, 1);
-                String apell = (String) this.jTableProveedores.getValueAt(fila, 2);
-                String ema = (String) this.jTableProveedores.getValueAt(fila, 3);
-                String tele = (String) this.jTableProveedores.getValueAt(fila, 4);
-                String url = (String) this.jTableProveedores.getValueAt(fila, 5);
-                // Muestra los datos en los campos de texto para su edición
-                jTextId_Proveedor.setText("" + id);
-                jTextNombre.setText(nomb);
-                jTextApellido.setText(apell);
-                jTextEmail.setText(ema);
-                jTextTelefono.setText(tele);
-                jTextUrl.setText(url);
+                // Captura el resto de los datos del proveedor seleccionado
+                String nomb = (String) this.jTableProveedores.getValueAt(fila, 1); // Nombre
+                String apell = (String) this.jTableProveedores.getValueAt(fila, 2); // Apellido
+                String ema = (String) this.jTableProveedores.getValueAt(fila, 3); // Email
+                String tele = (String) this.jTableProveedores.getValueAt(fila, 4); // Teléfono
+                String url = (String) this.jTableProveedores.getValueAt(fila, 5); // URL
+
+                // Muestra los datos obtenidos en los campos de texto para que puedan ser editados
+                jTextId_Proveedor.setText("" + id); // Muestra el ID en el campo correspondiente
+                jTextNombre.setText(nomb); // Muestra el nombre
+                jTextApellido.setText(apell); // Muestra el apellido
+                jTextEmail.setText(ema); // Muestra el email
+                jTextTelefono.setText(tele); // Muestra el teléfono
+                jTextUrl.setText(url); // Muestra la URL
 
             } catch (NumberFormatException e) {
+                // Maneja cualquier excepción al convertir el ID a entero
                 e.printStackTrace();
             }
         }
+
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
     private void jTextEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextEmailActionPerformed

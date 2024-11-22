@@ -60,26 +60,26 @@ public class DAOProductos {
         return new DataBase().Actualizar(transaccion); // Ejecuta la consulta de eliminación
     }
 
-    // Método para buscar productos por nombre
-    public List<Productos> BuscarProducto(String nombre) {
-        // Consulta SQL para buscar productos cuyo nombre contenga la cadena proporcionada
-        String transaccion = "SELECT * FROM Productos WHERE nombre LIKE '%" + nombre + "%'";
+  
+    // Método para buscar productos por ID
+    public Productos BuscarProductoPorId(int idProducto) {
+        // Consulta SQL para buscar un producto cuyo ID coincida con el proporcionado
+        String transaccion = "SELECT * FROM Productos WHERE id_producto = " + idProducto;
 
-        // Lista de registros obtenidos de la base de datos
+        // Lista de registros obtenidos de la base de datos (esperamos solo un registro)
         List<Map<String, Object>> registros = new DataBase().Listar(transaccion);
-        List<Productos> productos = new ArrayList<>();
 
-        // Recorre cada registro y lo convierte en un objeto Productos
-        for (Map<String, Object> registro : registros) {
-            Productos pro = new Productos(
+        // Si se encontró un registro, lo convierte en un objeto Productos
+        if (!registros.isEmpty()) {
+            Map<String, Object> registro = registros.get(0); // Obtiene el primer registro
+            return new Productos(
                     (int) registro.get("id_producto"), // Obtiene el ID del producto
                     (String) registro.get("nombre"), // Obtiene el nombre
                     (String) registro.get("descripcion"), // Obtiene la descripción
                     (float) registro.get("precio") // Obtiene el precio
             );
-            productos.add(pro); // Agrega el producto a la lista
         }
-        return productos; // Retorna la lista de productos encontrados
+        // Si no se encontró el producto, retorna null o lanza una excepción según lo necesites
+        return null;
     }
-   
 }

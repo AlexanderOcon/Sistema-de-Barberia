@@ -355,8 +355,7 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
 
         // Valida que los campos no estén vacíos
         if (nomb.contentEquals("") || desc.contentEquals("") || prec == 0) {
-            JOptionPane.showMessageDialog(rootPane,
-                    "Todos los campos son obligatorios");
+            JOptionPane.showMessageDialog(rootPane, "Todos los campos son requeridos");
         } else {
             try {
                 Productos pro = new DAOProductos().Insertar(nomb, desc, prec);
@@ -417,22 +416,31 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonBorrarActionPerformed
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
-        // Obtiene el texto ingresado en el campo de búsqueda
+// Obtiene el texto ingresado en el campo de búsqueda
         String terminoBusqueda = jTextProductoBuscar.getText().trim();
 
-        // Valida que el campo de búsqueda no esté vacío
+// Valida que el campo de búsqueda no esté vacío
         if (terminoBusqueda.isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "Ingrese un término para buscar."); // Muestra un mensaje al usuario si el campo está vacío
+            JOptionPane.showMessageDialog(rootPane, "Ingrese un ID para buscar."); // Muestra un mensaje al usuario si el campo está vacío
             return; // Finaliza el método
         }
 
         try {
-            // Llama al método BuscarProducto en DAOProductos para obtener la lista de productos que coinciden con el término de búsqueda
-            List<Productos> productos = new DAOProductos().BuscarProducto(terminoBusqueda);
+            // Intenta convertir el término de búsqueda a un número entero
+            int idProducto;
+            try {
+                idProducto = Integer.parseInt(terminoBusqueda); // Convierte el término de búsqueda a entero
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "El ID debe ser un número válido."); // Muestra un mensaje si el valor no es numérico
+                return; // Finaliza el método
+            }
 
-            // Valida si hay resultados en la lista de productos
-            if (productos.isEmpty()) {
-                JOptionPane.showMessageDialog(rootPane, "No se encontraron productos con el término: " + terminoBusqueda); // Informa al usuario que no hubo coincidencias
+            // Llama al método BuscarProductoPorId en DAOProductos para obtener el producto
+            Productos producto = new DAOProductos().BuscarProductoPorId(idProducto);
+
+            // Valida si el producto fue encontrado
+            if (producto == null) {
+                JOptionPane.showMessageDialog(rootPane, "No se encontró un producto con el ID: " + idProducto); // Informa al usuario que no hubo coincidencias
                 return; // Finaliza el método
             }
 
@@ -441,24 +449,23 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
             String[] columnas = {"id_producto", "nombre", "descripcion", "precio"};
             modelo.setColumnIdentifiers(columnas); // Configura los nombres de las columnas en el modelo
 
-            // Itera sobre los productos encontrados y los agrega como filas al modelo
-            for (Productos pro : productos) {
-                String[] renglon = {
-                    Integer.toString(pro.getId_producto()), // Convierte el ID del producto a String
-                    pro.getNombre(), // Obtiene el nombre del producto
-                    pro.getDescripcion(), // Obtiene la descripción del producto
-                    pro.getPrecio().toString() // Convierte el precio del producto a String
-                };
-                modelo.addRow(renglon); // Agrega la fila al modelo
-            }
+            // Crea una fila con los datos del producto encontrado
+            String[] renglon = {
+                Integer.toString(producto.getId_producto()), // Convierte el ID del producto a String
+                producto.getNombre(), // Obtiene el nombre del producto
+                producto.getDescripcion(), // Obtiene la descripción del producto
+                Float.toString(producto.getPrecio()) // Convierte el precio del producto a String
+            };
+            modelo.addRow(renglon); // Agrega la fila al modelo
 
-            // Actualiza la tabla con el modelo que contiene los datos de los productos encontrados
+            // Actualiza la tabla con el modelo que contiene los datos del producto encontrado
             jTableproducto.setModel(modelo);
 
         } catch (Exception e) {
             e.printStackTrace(); // Muestra detalles del error en la consola
             JOptionPane.showMessageDialog(rootPane, "Ocurrió un error al realizar la búsqueda."); // Notifica al usuario sobre el error
         }
+
 
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 

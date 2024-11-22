@@ -349,7 +349,7 @@ public class JInternalFrameCliente extends javax.swing.JInternalFrame {
         String ape = jTextFieldApellidos.getText();
         String tele = jTextFieldTelefono.getText();
         if (nomb.contentEquals("") || ape.contentEquals("") || tele.contentEquals("")) {
-            JOptionPane.showConfirmDialog(rootPane, "Llenar Todos los Campos");
+            JOptionPane.showMessageDialog(rootPane, "Llenar Todos los Campos");
         } else {
             try {
                 //objeto para acceder al método Insertar de DAOAutor
