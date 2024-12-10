@@ -354,7 +354,7 @@ public class NewJInternalProductos extends javax.swing.JInternalFrame {
         float prec = Float.parseFloat(this.jTextprecio.getText());
 
         // Valida que los campos no estén vacíos
-        if (nomb.contentEquals("") || desc.contentEquals("") || prec == 0) {
+        if (nomb.contentEquals("") || desc.contentEquals("") || prec <= 0) {
             JOptionPane.showMessageDialog(rootPane, "Todos los campos son requeridos");
         } else {
             try {
